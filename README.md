@@ -19,5 +19,7 @@ After every wave the player is presented with 3 powerups, of which the player ca
 ##Requirements
 Before you can start to build you need the following software installed:
 - Visual Studio 
-- MonoGame 3.5
-Once you've done that simply clone this repo and ... (Continue working on this)
+- MonoGame 3.5  
+ 
+Once you've done that simply clone this repo and  
+... (Continue working on this)
