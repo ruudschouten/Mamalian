@@ -19,5 +19,8 @@ Before you can start to build you need the following software installed:
 - Visual Studio 
 - MonoGame 3.5  
  
-Once you've done that simply clone this repository and
-... (Continue working on this)
+Once you've done that simply clone this repository in Visual Studio 2015 using the "Open From Source Control..." option.
+After that simply build the project by going to Build > Build Solution.  
+If this generates any errors you probably installed MonoGame wrong, or a wrong version of it.
+
+If this didn't generate any errors you have succesfully builded the project.
