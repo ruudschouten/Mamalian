@@ -8,7 +8,7 @@ During the character creation the player can choose between race, or animals rat
 who all have different stats.
 You can also influence stats during character creation, which will change a bit,
 but not as much as race will influence them.
-After choosing stats, the player will be able to choose a few skills.
+After choosing stats, the player needs to select a class, which will give the player a few skills.
 After that the player will be placed inside an arena, and will be able to choose from a number of weapons,
 and armour.
 When the player is done with that, the waves of enemies will start flowing in, trying to kill the user.
