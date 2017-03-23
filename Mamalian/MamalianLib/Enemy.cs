@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MamalianLib {
-    class Enemy : Character {
+    public class Enemy : Character {
         public int PhysDamage { get; set; }
         public int ElemDamage { get; set; }
         public int PhysReduction { get; set; }
@@ -24,6 +24,16 @@ namespace MamalianLib {
             if (PhysDamage + ElemDamage == 0) {
                 throw new Exception("Enemy needs to deal damage");
             }
+        }
+        public override string ToString() {
+            return $"Name: {Name}\n" +
+                   $"Stats________\n{Stats}\n" +
+                   $"Gender: {Gender}\n" +
+                   $"Race: {Race}\n" +
+                   $"PhysDamage: {PhysDamage}\n" +
+                   $"ElemDamage: {ElemDamage}\n" +
+                   $"PhysReduction: {PhysReduction}\n" +
+                   $"ElemReduction: {ElemReduction}";
         }
     }
 }

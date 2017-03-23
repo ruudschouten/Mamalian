@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MamalianLib {
-    class Player : Character {
+    public class Player : Character {
         public Class Class { get; set; }
         public int Gold { get; set; }
         public int Deaths { get; set; }
@@ -22,6 +22,17 @@ namespace MamalianLib {
             Gold = gold;
             Deaths = deaths;
             HighestWave = highestWave;
+        }
+
+        public override string ToString() {
+            return $"Name: {Name}\n" +
+                   $"Stats________\n{Stats}\n" +
+                   $"Class________\n{Class}\n" +
+                   $"Gender: {Gender}\n" +
+                   $"Race: {Race}\n" +
+                   $"Gold: {Gold}\n" +
+                   $"Deaths: {Deaths}\n" +
+                   $"HighestWave: {HighestWave}";
         }
     }
 }

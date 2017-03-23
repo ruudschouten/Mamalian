@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MamalianLib {
-    class Class {
+    public class Class {
         public int Id { get; set; }
         public string Name { get; set; }
         public int PhysDamage { get; set; }
@@ -28,6 +28,20 @@ namespace MamalianLib {
 
         public void AssignSkills(string skill) {
             Skills.Add(skill);
+        }
+
+        public override string ToString() {
+            string s = "";
+            string skills = Skills.Aggregate("", (current, skill) => current + (skill + " "));
+
+            s += $"Name: {Name}\n";
+            if (PhysDamage != 0) s += $"PhysDamage: {PhysDamage}\n";
+            if (PhysReduction != 0) s += $"PhysReduction: {PhysReduction}\n";
+            if (ElemDamage != 0) s += $"ElemDamage: {ElemDamage}\n";
+            if (ElemReduction != 0) s += $"ElemReduction: {ElemReduction}\n";
+            if(skills != "") s+= $"Skills: {skills}";
+            if (s.EndsWith("\n")) s = s.Remove(s.Length - 3);
+            return s;
         }
     }
 }

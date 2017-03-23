@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MamalianLib {
-    class Armour : Item {
+    public class Armour : Item {
         public int PhysReduction { get; set; }
         public int ElemReduction { get; set; }
 
@@ -16,6 +16,14 @@ namespace MamalianLib {
             GoldValue = gold;
             PhysReduction = phys;
             ElemReduction = elem;
+        }
+
+        public override string ToString() {
+            return $"Name: {Name}\n" +
+                   $"Description: {Description}\n" +
+                   $"Gold Value: {GoldValue}\n" +
+                   $"PhysReduction: {PhysReduction}\n" +
+                   $"ElemReduction: {ElemReduction}";
         }
     }
 }

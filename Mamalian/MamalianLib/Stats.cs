@@ -20,7 +20,8 @@ namespace MamalianLib {
         /// <summary>
         /// Stats for player and enemies
         /// </summary>
-        public Stats(int level, int experience, int health, int spirit, int healthReg, int spiritReg, int str, int dex,
+        public Stats(int level, int experience, int health, int spirit, float healthReg, float spiritReg, int str,
+            int dex,
             int intl) {
             Level = level;
             Experience = experience;
@@ -36,7 +37,7 @@ namespace MamalianLib {
         /// <summary>
         /// Stats for Potions and Boosts
         /// </summary>
-        public Stats(int health, int spirit, int healthReg, int spiritReg, int str, int dex, int intl) {
+        public Stats(int health, int spirit, float healthReg, float spiritReg, int str, int dex, int intl) {
             Health = health;
             Spirit = spirit;
             HealthRegen = healthReg;
@@ -47,15 +48,18 @@ namespace MamalianLib {
         }
 
         public override string ToString() {
-            return $"Level: {Level}\n" +
-                   $"Experience: {Experience}\n" +
-                   $"Health: {Health}\n" +
-                   $"Spirit: {Spirit}\n" +
-                   $"HealthRegen: {HealthRegen}\n" +
-                   $"SpiritRegen: {SpiritRegen}\n" +
-                   $"Strength: {Strength}\n" +
-                   $"Dexterity: {Dexterity}\n" +
-                   $"Intelligence: {Intelligence}";
+            string s = "";
+            if (Level != 0) s += $"Level: {Level}\n";
+            if (Experience != 0) s += $"Experience: {Experience}\n";
+            if (Health != 0) s += $"Health: {Health}\n";
+            if (Spirit != 0) s += $"Spirit: {Spirit}\n";
+            if (HealthRegen != 0) s += $"HealthRegen: {HealthRegen}\n";
+            if (SpiritRegen != 0) s += $"SpiritRegen: {SpiritRegen}\n";
+            if (Strength != 0) s += $"Strength: {Strength}\n";
+            if (Dexterity != 0) s += $"Dexterity: {Dexterity}\n";
+            if (Intelligence != 0) s += $"Intelligence: {Intelligence}";
+            if (s.EndsWith("\n")) s = s.Remove(s.Length - 3);
+            return s;
         }
     }
 }

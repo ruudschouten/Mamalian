@@ -3,7 +3,7 @@
   <Class Name="MamalianLib.Armour">
     <Position X="12.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAEAAAAAAAEAAAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
       <FileName>Armour.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -22,14 +22,14 @@
   <Class Name="MamalianLib.Class">
     <Position X="8.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EAACAAAEAAAAAAAAAAAAgAQAAAAAAAACAQAAAAAEAAA=</HashCode>
+      <HashCode>EAACAAAEAAAAAAAEAAAAgAQAAAAAAAACAQAAAAAEAAA=</HashCode>
       <FileName>Class.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MamalianLib.Enemy">
     <Position X="4.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAEAAAAAAAAAAAAgAAAAAAAAAACAAAAAAAEAAA=</HashCode>
+      <HashCode>AAAAAAAEAAAAAAAEAAAAgAAAAAAAAAACAAAAAAAEAAA=</HashCode>
       <FileName>Enemy.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -43,7 +43,7 @@
   <Class Name="MamalianLib.Player">
     <Position X="6.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAABAAAAAAAAAAAIAAAAAAAAAAAAgAAAAAgAAAAE=</HashCode>
+      <HashCode>AAAAAABAAAAAAAAEAAIAAAAAAAAAAAAgAAAAAgAAAAE=</HashCode>
       <FileName>Player.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -56,7 +56,7 @@
   <Class Name="MamalianLib.Potion">
     <Position X="10.5" Y="4" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>ABAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Potion.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -66,7 +66,7 @@
   <Class Name="MamalianLib.PowerUp">
     <Position X="0.5" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAgIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAACAAAAAAAgIAAEAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>PowerUp.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -83,7 +83,7 @@
   <Class Name="MamalianLib.Wave">
     <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAQAAAAAAAAEAAAAAAACAAAACAAA=</HashCode>
+      <HashCode>AAACAAAAAAAAAAAEAQAAAAAAAAEAAAAAAACAAAACAAA=</HashCode>
       <FileName>Wave.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -92,9 +92,9 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="MamalianLib.Weapon">
-    <Position X="12.25" Y="2.5" Width="1.5" />
+    <Position X="12.25" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAgAAAAAAAAAIAAAAAAAAEAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAgAAAAAAAAAIAAAAAAAAEAAA=</HashCode>
       <FileName>Weapon.cs</FileName>
     </TypeIdentifier>
   </Class>

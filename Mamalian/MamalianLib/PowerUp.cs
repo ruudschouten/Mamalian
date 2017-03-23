@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MamalianLib {
-    class PowerUp {
+    public class PowerUp {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -16,6 +16,12 @@ namespace MamalianLib {
             Name = name;
             Description = desc;
             StatBoost = stats;
+        }
+
+        public override string ToString() {
+            return $"Name: {Name}\n" +
+                   $"Description: {Description}\n" +
+                   $"StatBoost________\n{StatBoost}";
         }
     }
 }

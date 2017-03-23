@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MamalianLib {
-    class Potion : Item {
+    public class Potion : Item {
         public Stats Stats { get; set; }
 
         public Potion(int id, string name, string desc, int gold, Stats stats) {
@@ -14,6 +14,13 @@ namespace MamalianLib {
             Description = desc;
             GoldValue = gold;
             Stats = stats;
+        }
+
+        public override string ToString() {
+            return $"Name: {Name}\n" +
+                   $"Description: {Description}\n" +
+                   $"Gold Value: {GoldValue}\n" +
+                   $"Stats________\n{Stats}\n";
         }
     }
 }

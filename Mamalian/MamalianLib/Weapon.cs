@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MamalianLib {
-    class Weapon : Item {
+    public class Weapon : Item {
         public float AttackSpeed { get; set; }
         public int PhysDamage { get; set; }
         public int ElemDamage { get; set; }
@@ -18,6 +18,15 @@ namespace MamalianLib {
             AttackSpeed = speed;
             PhysDamage = phys;
             ElemDamage = elem;
+        }
+
+        public override string ToString() {
+            return $"Name: {Name}\n" +
+                   $"Description: {Description}\n" +
+                   $"Gold Value: {GoldValue}\n" +
+                   $"Attack Speed: {AttackSpeed}\n" +
+                   $"PhysDamage: {PhysDamage}\n" +
+                   $"ElemDamage: {ElemDamage}";
         }
     }
 }
