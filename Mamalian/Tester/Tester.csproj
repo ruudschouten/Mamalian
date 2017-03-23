@@ -48,5 +48,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MamalianLib\MamalianLib.csproj">
+      <Project>{A0B3FF81-C3B0-461E-A10D-DCE4D4319A71}</Project>
+      <Name>MamalianLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
