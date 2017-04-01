@@ -49,6 +49,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MamalianDAL\MamalianDAL.csproj">
+      <Project>{ED4A9AA7-142B-472B-B36C-694E35D75C7E}</Project>
+      <Name>MamalianDAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MamalianLib\MamalianLib.csproj">
       <Project>{A0B3FF81-C3B0-461E-A10D-DCE4D4319A71}</Project>
       <Name>MamalianLib</Name>

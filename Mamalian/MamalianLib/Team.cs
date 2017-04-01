@@ -21,5 +21,10 @@ namespace MamalianLib {
         public void AddClient(Player client) {
             Client = client;
         }
+
+        public override string ToString() {
+            return $"Host: {Host.Name}\n" +
+                   $"Client: {Client.Name}";
+        }
     }
 }
