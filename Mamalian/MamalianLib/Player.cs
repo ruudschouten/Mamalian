@@ -12,6 +12,18 @@ namespace MamalianLib {
         public int HighestWave { get; set; }
         public List<Item> Inventory { get; set; } = new List<Item>();
 
+        public Player() { }
+
+        public Player(int id, string name, Gender gender, Race race, int gold, int deaths, int highestWave) {
+            Id = id;
+            Name = name;
+            Gender = gender;
+            Race = race;
+            Gold = gold;
+            Deaths = deaths;
+            HighestWave = highestWave;
+        }
+
         public Player(int id, string name, Stats stats, Class c, Gender g, Race r, int gold = 100, int deaths = 0, int highestWave = 0) {
             Id = id;
             Name = name;

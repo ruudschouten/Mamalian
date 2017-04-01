@@ -11,6 +11,17 @@ namespace MamalianLib {
         public int PhysReduction { get; set; }
         public int ElemReduction { get; set; }
 
+        public Enemy(int id, string name, Gender g, Race r, int physD, int elemD, int physR, int elemR) {
+            Id = id;
+            Name = name;
+            Gender = g;
+            Race = r;
+            PhysDamage = physD;
+            PhysReduction = physR;
+            ElemDamage = elemD;
+            ElemReduction = elemR;
+        }
+
         public Enemy(int id, string name, Stats stats, Gender g, Race r, int physD = 0, int elemD = 0, int physR = 0, int elemR = 0) {
             Id = id;
             Name = name;
@@ -25,6 +36,10 @@ namespace MamalianLib {
                 throw new Exception("Enemy needs to deal damage");
             }
         }
+
+        public Enemy() {
+        }
+
         public override string ToString() {
             return $"Name: {Name}\n" +
                    $"Stats________\n{Stats}\n" +

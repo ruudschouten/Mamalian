@@ -18,6 +18,9 @@ namespace MamalianLib {
             ElemReduction = elem;
         }
 
+        public Armour() {
+        }
+
         public override string ToString() {
             return $"Name: {Name}\n" +
                    $"Description: {Description}\n" +

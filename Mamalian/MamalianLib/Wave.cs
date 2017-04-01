@@ -12,6 +12,13 @@ namespace MamalianLib {
         public List<PowerUp> PowerUps { get; set; } = new List<PowerUp>();
         public List<Enemy> Enemies { get; set; } = new List<Enemy>();
 
+        public Wave() { }
+
+        public Wave(int id, float statMod, int maxMon) {
+            Id = id;
+            StatMultiplier = statMod;
+            MaxMonsters = maxMon;
+        }
         public Wave(int id, float statMod, int maxMon, List<Enemy> enemies, List<PowerUp> powerups) {
             Id = id;
             StatMultiplier = statMod;

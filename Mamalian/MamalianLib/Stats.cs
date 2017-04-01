@@ -47,6 +47,9 @@ namespace MamalianLib {
             Intelligence = intl;
         }
 
+        public Stats() {
+        }
+
         public override string ToString() {
             string s = "";
             if (Level != 0) s += $"Level: {Level}\n";

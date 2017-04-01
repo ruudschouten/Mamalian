@@ -20,6 +20,9 @@ namespace MamalianLib {
             ElemDamage = elem;
         }
 
+        public Weapon() {
+        }
+
         public override string ToString() {
             return $"Name: {Name}\n" +
                    $"Description: {Description}\n" +

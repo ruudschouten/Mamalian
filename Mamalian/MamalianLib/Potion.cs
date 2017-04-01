@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace MamalianLib {
     public class Potion : Item {
+
         public Stats Stats { get; set; }
 
         public Potion(int id, string name, string desc, int gold, Stats stats) {
@@ -15,6 +16,19 @@ namespace MamalianLib {
             GoldValue = gold;
             Stats = stats;
         }
+
+        public Potion(int id, string name, string desc, int gold) {
+            Id = id;
+            Name = name;
+            Description = desc;
+            GoldValue = gold;
+        }
+
+        public void AssignStats(Stats stats) {
+            Stats = stats;
+        }
+
+        public Potion() { }
 
         public override string ToString() {
             return $"Name: {Name}\n" +

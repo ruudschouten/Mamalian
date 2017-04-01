@@ -26,6 +26,9 @@ namespace MamalianLib {
             }
         }
 
+        public Class() {
+        }
+
         public void AssignSkills(string skill) {
             Skills.Add(skill);
         }
