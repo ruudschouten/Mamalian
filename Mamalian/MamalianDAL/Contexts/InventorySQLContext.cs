@@ -75,9 +75,5 @@ namespace MamalianDAL.Contexts {
             }
             return result;
         }
-
-        public bool AddItem(Player p, Item item) {
-            
-        }
     }
 }
