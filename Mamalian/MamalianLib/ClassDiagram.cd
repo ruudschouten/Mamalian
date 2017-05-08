@@ -56,7 +56,7 @@
   <Class Name="MamalianLib.Potion">
     <Position X="10.5" Y="4" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ABAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>ABAAAAAAAAAAAAAFAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Potion.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -66,7 +66,7 @@
   <Class Name="MamalianLib.PowerUp">
     <Position X="0.5" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAgIAAEAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAACAAAAAAAiIAAFAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>PowerUp.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -74,7 +74,7 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="MamalianLib.Stats">
-    <Position X="7" Y="3.5" Width="1.5" />
+    <Position X="7" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACCACAAAAAAAAEAAAAAAAAAABAAAABAAABAAAAQCA=</HashCode>
       <FileName>Stats.cs</FileName>
