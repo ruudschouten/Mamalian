@@ -5,7 +5,7 @@ using MamalianDAL.Contexts;
 using MamalianLib;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace TeamUnitTest {
+namespace IntegrationUnitTests {
     [TestClass]
     public class PlayerIntegrationTest {
         [TestMethod]

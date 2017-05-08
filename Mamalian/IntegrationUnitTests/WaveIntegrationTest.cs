@@ -14,11 +14,5 @@ namespace IntegrationUnitTests {
             Wave c = repo.GetById(1);
             Assert.IsNotNull(c, "Wave wasn't correctly retrieved");
         }
-        [TestMethod]
-        public void WavesSelect() {
-            Repository<Wave> repo = new Repository<Wave>(new WaveSQLContext());
-            List<Wave> c = repo.GetAll();
-            Assert.IsNotNull(c, "Waves weren't correctly retrieved");
-        }
     }
 }
