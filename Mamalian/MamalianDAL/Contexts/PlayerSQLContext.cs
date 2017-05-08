@@ -16,9 +16,9 @@ namespace MamalianDAL.Contexts {
                            "s.Id as sId, s.Level, s.Experience, s.Health, s.Spirit, s.HealthRegen, s.SpiritRegen, s.Strength, s.Dexterity, s.Intelligence, " +
                            "c.Id as cId, c.Name, c.PhysDamage, c.PhysReduction, c.ElemDamage, c.ElemReduction, c.Skills " +
                            "FROM PlayerStats " +
-                           "INNER JOIN Player p on PlayerStats.PlayerId = p.Id " +
-                           "INNER JOIN Stats s on PlayerStats.StatsId = s.Id " +
-                           "INNER JOIN Class c on p.Id = c.Id ";
+                           "LEFT OUTER JOIN Player p on PlayerStats.PlayerId = p.Id " +
+                           "LEFT OUTER JOIN Stats s on PlayerStats.StatsId = s.Id " +
+                           "LEFT OUTER JOIN Class c on p.Id = c.Id ";
             SqlCommand command = new SqlCommand(query, con);
             SqlDataReader reader = command.ExecuteReader();
             while (reader.Read()) {
