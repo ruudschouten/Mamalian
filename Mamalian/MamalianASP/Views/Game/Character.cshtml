@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "Character";
+}
+@model List<int>
+@{
+    int leftPoints = 8;
+    int str = 5, dex = 5, intl = 5;
+}
+
+<script type="text/javascript" src="script.js"></script>
+<h1>Character Creation</h1>
+<div>
+    <div style="display: flex; justify-content: space-evenly;">
+        <div>
+            <h2>Character</h2>
+            <p>Name</p>
+            <input type="text" id="charName" />
+            <p>Gender</p>
+            <select id="charGender">
+                <option>Male</option>
+                <option>Female</option>
+            </select>
+            <p>Race</p>
+            <select id="charRace">
+                <option>Cat</option>
+                <option>Dog</option>
+                <option>Fish</option>
+                <option>Bird</option>
+                <option>Horse</option>
+            </select>
+            <p style="margin-top: 12px">
+                <a class="btn btn-default"> Create </a>
+            </p>
+        </div>
+        <div>
+            <h2>Statistics</h2>
+            <p>
+                Stats remaining:&thinsp; <b>@leftPoints</b>
+            </p>
+            <div>
+                <p style="display: inline">
+                    Strength:&thinsp; <b>@str</b>
+                </p>
+            </div>
+            <input id="btnAddStr" class="btn btn-default" type="button" value="Add Strength" onclick="addValue('str');"/>
+            <a style="width: 35px" class="btn btn-default" id="statStrAdd" onclick="addValue('str');"> + </a>
+            <a style="width: 35px" class="btn btn-default" id="statStrReduce" onclick="reduceValue('str');"> - </a>
+            <div>
+                <p style="display: inline">
+                    Dexterity:&thinsp; <b>@dex</b>
+                </p>
+            </div>
+            <a style="width: 35px" class="btn btn-default" id="statDexAdd" onclick="addValue('dex');"> + </a>
+            <a style="width: 35px" class="btn btn-default" id="statDexReduce" onclick="reduceValue('dex');"> - </a>
+            <div>
+                <p style="display: inline">
+                    Intelligence:&thinsp; <b>@intl</b>
+                </p>
+            </div>
+            <a style="width: 35px" class="btn btn-default" id="statIntAdd" onclick="addValue('intl');"> + </a>
+            <a style="width: 35px" class="btn btn-default" id="statIntReduce" onclick="reduceValue('intl');"> - </a>
+        </div>
+    </div>
+</div>

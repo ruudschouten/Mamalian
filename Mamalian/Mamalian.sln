@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.10
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MamalianLib", "MamalianLib\MamalianLib.csproj", "{A0B3FF81-C3B0-461E-A10D-DCE4D4319A71}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MamalianDAL", "MamalianDAL\MamalianDAL.csproj", "{ED4A9AA7-142B-472B-B36C-694E35D75C7E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationUnitTests", "IntegrationUnitTests\IntegrationUnitTests.csproj", "{BAE965CB-847C-4A5D-8D61-3432D4377EA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MamalianASP", "MamalianASP\MamalianASP.csproj", "{B8E8987D-AE42-44BB-95F6-8CC349374707}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{BAE965CB-847C-4A5D-8D61-3432D4377EA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAE965CB-847C-4A5D-8D61-3432D4377EA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAE965CB-847C-4A5D-8D61-3432D4377EA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8E8987D-AE42-44BB-95F6-8CC349374707}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8E8987D-AE42-44BB-95F6-8CC349374707}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8E8987D-AE42-44BB-95F6-8CC349374707}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8E8987D-AE42-44BB-95F6-8CC349374707}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

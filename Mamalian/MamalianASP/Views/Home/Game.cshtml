@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Game";
+}
+
+<h1>Mamalian</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Start</h2>
+        <p>
+            Before you can start playing you need to create a character.
+        </p>
+        <p><a class="btn btn-default" href=@Url.Action("Character", "Game", null)>Create character &raquo;</a></p>
+        <p>
+            Now that you have created a character you're able to play the game!
+        </p>
+        <p><a class="btn btn-default" href=@Url.Action("Select", "Game", null)>Select character &raquo;</a></p>
+    </div>
+</div>
