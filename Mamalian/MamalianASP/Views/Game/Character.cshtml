@@ -1,10 +1,8 @@
 ﻿@{
     ViewBag.Title = "Character";
 }
-@model List<int>
-@{
-    int str = 0, dex = 0, intl = 0;
-}
+@using MamalianLib
+@model MamalianDAL.Contexts.PlayerSQLContext
 
 <script type="text/javascript">
     function raceChanged() {
@@ -16,36 +14,54 @@
         var race = select.options[select.selectedIndex].value;
         //Total shouldn't be higher than 21
         switch (race) {
-            case "1": //Cat
-                str.textContent = "8";
-                dex.textContent = "8";
-                intl.textContent = "5";
-                break;
-            case "2": //Dog
-                str.textContent = "8";
-                dex.textContent = "5";
-                intl.textContent = "8";
-                break;
-            case "3": //Fish
-                str.textContent = "3";
-                dex.textContent = "10";
-                intl.textContent = "8";
-                break;
-            case "4": //Bird
-                str.textContent = "4";
-                dex.textContent = "7";
-                intl.textContent = "10";
-                break;
-            case "5": //Horse
-                str.textContent = "10";
-                dex.textContent = "6";
-                intl.textContent = "5";
-                break;
-            default:
-                str.textContent = "1";
-                dex.textContent = "1";
-                intl.textContent = "1";
-                break;
+        case "1": //Cat
+            str.textContent = "8";
+            dex.textContent = "8";
+            intl.textContent = "5";
+            break;
+        case "2": //Dog
+            str.textContent = "8";
+            dex.textContent = "5";
+            intl.textContent = "8";
+            break;
+        case "3": //Fish
+            str.textContent = "3";
+            dex.textContent = "10";
+            intl.textContent = "8";
+            break;
+        case "4": //Bird
+            str.textContent = "4";
+            dex.textContent = "7";
+            intl.textContent = "10";
+            break;
+        case "5": //Horse
+            str.textContent = "10";
+            dex.textContent = "6";
+            intl.textContent = "5";
+            break;
+        default:
+            str.textContent = "1";
+            dex.textContent = "1";
+            intl.textContent = "1";
+            break;
+        }
+    }
+
+    function createPlayer() {
+        var name = document.getElementById("charName").value;
+        var str = document.getElementById("charStrength").textContent;
+        var dex = document.getElementById("charDexterity").textContent;
+        var intl = document.getElementById("charIntelligence").textContent;
+
+        var genderSelect = document.getElementById("charGender");
+        var gender = genderSelect.options[genderSelect.selectedIndex].text;
+
+        var raceSelect = document.getElementById("charRace");
+        var race = raceSelect.options[raceSelect.selectedIndex].text;
+        if (name === "" || name == null) {
+            window.alert("Please enter a name");
+        } else {
+            //TODO: Add player to database
         }
     }
 </script>
@@ -70,7 +86,7 @@
                 <option value="5">Horse</option>
             </select>
             <p style="margin-top: 12px">
-                <a class="btn btn-default"> Create </a>
+                <a class="btn btn-default" onclick="createPlayer();"> Create </a>
             </p>
         </div>
         <div style="width: 35%">
