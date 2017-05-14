@@ -1,53 +1,35 @@
-﻿var left = 0;
-var str = 0, dex = 0, intl = 0;
-var ran = 0;
+﻿function raceChanged() {
+    var str = document.getElementById("charStrength");
+    var dex = document.getElementById("charDexterity");
+    var intl = document.getElementById("charIntelligence");
 
-$.getScript("/Scripts/Pages/ReferralEdit.js")
-    .done(function (script, textStatus) {
-        initReferralEdit();
-    })
-    .fail(function (jqxhr, settings, exception) {
-        console.log('failed to load script');
-    });
-
-function initialize() {
-    left = 8;
-    str = 5;
-    dex = 5;
-    intl = 5;
-    ran = 1;
-}
-
-function addValue(kind) {
-    if (ran == 0) { initialize(); }
-    if (left != 0) {
-        left--;
-        if (kind == "str") {
-            str++;
-        } else if (kind == "dex") {
-            dex++;
-        } else if (kind == "intl") {
-            intl++;
-        }
-    }
-}
-
-function reduceValue(kind) {
-    if (ran == 0) { initialize(); }
-    if (kind == "str") {
-        if (str != 0) {
-            str--;
-            leftPoints++;
-        }
-    } else if (kind == "dex") {
-        if (dex != 0) {
-            dex--;
-            leftPoints++;
-        }
-    } else if (kind == "intl") {
-        if (ntl != 0) {
-            intl--;
-            leftPoints++;
-        }
+    var select = document.getElementById("charRace");
+    race = select.options[select.selectedIndex].value;
+    //Total shouldn't be higher than 21
+    switch (race) { 
+        case 1: //Cat
+            str.value = "8";
+            dex.value = "8";
+            intl.value = "5";
+            break;
+        case 2: //Dog
+            str.value = "8";
+            dex.value = "5";
+            intl.value = "8";
+            break;
+        case 3: //Fish
+            str.value  = "3";
+            dex.value  = "10";
+            intl.value = "8";
+            break;
+        case 4: //Bird
+            str.value = "4";
+            dex.value = "7";
+            intl.value = "10";
+        case 5: //Horse
+            str.value = "10";
+            dex.value = "6";
+            intl.value = "5";
+    default:
     }
 }
