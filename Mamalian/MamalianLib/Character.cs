@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 
 namespace MamalianLib {
     public enum Gender {
-        Male = 1,
-        Female = 2
+        Male,
+        Female
     }
 
     public enum Race {
-        Cat = 1,
-        Dog = 2,
-        Fish = 3,
-        Pidgeon = 4
+        Cat,
+        Dog,
+        Fish,
+        Bird,
+        Horse
     }
 
     public abstract class Character {
