@@ -4,50 +4,8 @@
 @using MamalianASP.Models
 @using MamalianLib
 @model MamalianASP.Models.CharacterViewModel
-@using (Html.BeginForm("CreatePlayer", "Game", FormMethod.Post)) {
-    <script type="text/javascript">
-        function raceChanged() {
-            var str = document.getElementById("Strength");
-            var dex = document.getElementById("charDexterity");
-            var intl = document.getElementById("charIntelligence");
 
-            var select = document.getElementById("charRace");
-            var race = select.options[select.selectedIndex].value;
-            //Total shouldn't be higher than 21
-            switch (race) {
-                case "1": //Cat
-                    str.textContent = "8";
-                    dex.textContent = "8";
-                    intl.textContent = "5";
-                    break;
-                case "2": //Dog
-                    str.textContent = "8";
-                    dex.textContent = "5";
-                    intl.textContent = "8";
-                    break;
-                case "3": //Fish
-                    str.textContent = "3";
-                    dex.textContent = "10";
-                    intl.textContent = "8";
-                    break;
-                case "4": //Bird
-                    str.textContent = "4";
-                    dex.textContent = "7";
-                    intl.textContent = "10";
-                    break;
-                case "5": //Horse
-                    str.textContent = "10";
-                    dex.textContent = "6";
-                    intl.textContent = "5";
-                    break;
-                default:
-                    str.textContent = "1";
-                    dex.textContent = "1";
-                    intl.textContent = "1";
-                    break;
-            }
-        }
-    </script>
+@using (Html.BeginForm("CreatePlayer", "Game", FormMethod.Post)) {
     <h1>Character Creation</h1>
     <div>
         <div style="display: flex">
@@ -55,23 +13,78 @@
                 <h2>Character</h2>
                 <p>@Html.LabelFor(model => model.Name)</p>
                 @Html.TextBoxFor(model => model.Name)
-@*                <input type="text" id="charName" />*@
-                
-                
                 <p>@Html.LabelFor(model => model.Gender)</p>
                 @Html.EnumDropDownListFor(m => m.Gender)
+                <p>@Html.LabelFor(model => model.Class)</p>
+                @Html.EnumDropDownListFor(m => m.Classes)
                 <p>@Html.LabelFor(model => model.Race)</p>
-                @Html.EnumDropDownListFor(m => m.Race)
+                @Html.EnumDropDownListFor(m => m.Race, null, new {@id = "charRace", @onchange="raceChanged();"})
                 <p style="margin-top: 12px">
-                    <input class="btn btn-default" id="btnSubmit" type="submit" value="Submit" />
+                    <input class="btn btn-default" id="btnSubmit" type="submit" value="Submit"/>
                 </p>
             </div>
             <div style="width: 35%">
                 <h2>Statistics</h2>
-                <div> <p style="display: inline"> @Html.LabelFor(model => model.Strength):&thinsp; @Html.ValueFor(model => model.Strength) @*<b for="Strength" id="charStrength">8</b>*@</p></div>
-                <div> <p style="display: inline"> @Html.LabelFor(model => model.Dexterity):&thinsp; <b for="Dexterity" id="charDexterity">8</b> </p></div>
-                <div> <p style="display: inline"> @Html.LabelFor(model => model.Intelligence):&thinsp; <b for="Intelligence" id="charIntelligence">5</b> </p></div>
+                <div>
+                    <p style="display: inline">
+                        @Html.LabelFor(model => model.Strength):&thinsp; <b for="Strength" id="charStrength">8</b>
+                    </p>
+                </div>
+                <div>
+                    <p style="display: inline">
+                        @Html.LabelFor(model => model.Dexterity):&thinsp; <b for="Dexterity" id="charDexterity">8</b>
+                    </p>
+                </div>
+                <div>
+                    <p style="display: inline">
+                        @Html.LabelFor(model => model.Intelligence):&thinsp; <b for="Intelligence" id="charIntelligence">5</b>
+                    </p>
+                </div>
             </div>
         </div>
     </div>
 }
+
+<script type="text/javascript">
+    function raceChanged() {
+        var str = document.getElementById("charStrength");
+        var dex = document.getElementById("charDexterity");
+        var intl = document.getElementById("charIntelligence");
+
+        var select = document.getElementById("charRace");
+        var race = select.options[select.selectedIndex].value;
+        //Total shouldn't be higher than 21
+        switch (race) {
+        case "1": //Cat
+            str.textContent = "8";
+            dex.textContent = "8";
+            intl.textContent = "5";
+            break;
+        case "2": //Dog
+            str.textContent = "8";
+            dex.textContent = "5";
+            intl.textContent = "8";
+            break;
+        case "3": //Fish
+            str.textContent = "3";
+            dex.textContent = "10";
+            intl.textContent = "8";
+            break;
+        case "4": //Bird
+            str.textContent = "4";
+            dex.textContent = "7";
+            intl.textContent = "10";
+            break;
+        case "5": //Horse
+            str.textContent = "10";
+            dex.textContent = "6";
+            intl.textContent = "5";
+            break;
+        default:
+            str.textContent = "1";
+            dex.textContent = "1";
+            intl.textContent = "1";
+            break;
+        }
+    }
+</script>
