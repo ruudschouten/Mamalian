@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MamalianLib {
     public class Player : Character {
+        private Gender gender;
+        private Race race;
+
         public Class Class { get; set; }
         public int Gold { get; set; }
         public int Deaths { get; set; }
@@ -34,6 +37,19 @@ namespace MamalianLib {
             Gold = gold;
             Deaths = deaths;
             HighestWave = highestWave;
+        }
+
+        public Player(string name, Gender gender, Race race, string className, int str, int dex, int intl) {
+            Name = name;
+            this.gender = gender;
+            this.race = race;
+            Stats = new Stats(1, 0, 100,20,0.5f, 0.5f, str, dex, intl);
+            if (className == "Warrior") {
+                Class = new Class(className, 10, 5, 0, 0);
+            }
+            else {
+                Class = new Class(className, 0, 0, 10, 5);
+            }
         }
 
         public override string ToString() {

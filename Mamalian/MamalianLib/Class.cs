@@ -29,6 +29,17 @@ namespace MamalianLib {
         public Class() {
         }
 
+        public Class(string name, int physD = 0, int physR = 0, int elemD = 0, int elemR = 0) {
+            Name = name;
+            PhysDamage = physD;
+            PhysReduction = physR;
+            ElemDamage = elemD;
+            ElemReduction = elemR;
+            if (PhysDamage + ElemDamage == 0) {
+                throw new Exception("Class needs to have at least one point of damage!");
+            }
+        }
+
         public void AssignSkills(string skill) {
             Skills.Add(skill);
         }
