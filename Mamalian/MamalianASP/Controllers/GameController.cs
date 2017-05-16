@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MamalianASP.Models;
+using MamalianDAL;
 using MamalianDAL.Contexts;
 using MamalianLib;
 
@@ -61,7 +62,10 @@ namespace MamalianASP.Controllers {
                     break;
             }
             Player p = new Player(name, gender, race, c.ToString(), strength, dexterity, intelligence);
-            return Content(p.ToString());
+//            return Content(p.ToString());
+            var repo = new Repository<Player>(new PlayerSQLContext());
+            Player player = repo.Insert(p);
+            return new EmptyResult();
         }
     }
 }
