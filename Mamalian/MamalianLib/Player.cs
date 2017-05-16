@@ -43,12 +43,15 @@ namespace MamalianLib {
             Name = name;
             this.gender = gender;
             this.race = race;
+            Gold = 50;
             Stats = new Stats(1, 0, 100,20,0.5f, 0.5f, str, dex, intl);
             if (className == "Warrior") {
                 Class = new Class(className, 10, 5, 0, 0);
+                Class.AssignSkills("Bash");
             }
             else {
                 Class = new Class(className, 0, 0, 10, 5);
+                Class.AssignSkills("Frozen Touch");
             }
         }
 
