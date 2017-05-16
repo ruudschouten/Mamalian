@@ -62,10 +62,9 @@ namespace MamalianASP.Controllers {
                     break;
             }
             Player p = new Player(name, gender, race, c.ToString(), strength, dexterity, intelligence);
-//            return Content(p.ToString());
             var repo = new Repository<Player>(new PlayerSQLContext());
             Player player = repo.Insert(p);
-            return new EmptyResult();
+            return Content("Succesfully inserted\n" + player.ToString());
         }
     }
 }
