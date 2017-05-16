@@ -50,6 +50,13 @@ namespace MamalianDAL.Contexts {
             command.Parameters.AddWithValue("@int", Stats.Intelligence);
             command.ExecuteNonQuery();
 
+            if (Stats.Id == 0) {
+                query = "SELECT IDENT_CURRENT('Stats')";
+                var cmd = new SqlCommand(query, con);
+                var id = cmd.ExecuteScalar();
+                Stats.Id = Convert.ToInt32(id);
+            }
+
             return GetById(Stats.Id);
         }
 

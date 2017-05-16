@@ -35,9 +35,10 @@ namespace MamalianDAL.Contexts {
 
         public Class Insert(Class Class) {
             SqlConnection con = Database.connection;
-            string query = "INSERT INTO Class(Name, PhysDamage, PhysReduction, ElemDamage, ElemReduction, Skills) VALUES(" +
-                           "@name, @physD, @physR, @elemD, @elemR, @skills)";
+            string query = "INSERT INTO Class(Id, Name, PhysDamage, PhysReduction, ElemDamage, ElemReduction, Skills) VALUES(" +
+                           "@id, @name, @physD, @physR, @elemD, @elemR, @skills)";
             SqlCommand command = new SqlCommand(query, con);
+            command.Parameters.AddWithValue("@id", Class.Id);
             command.Parameters.AddWithValue("@name", Class.Name);
             command.Parameters.AddWithValue("@physD", Class.PhysDamage);
             command.Parameters.AddWithValue("@physR", Class.PhysReduction);
@@ -45,7 +46,6 @@ namespace MamalianDAL.Contexts {
             command.Parameters.AddWithValue("@elemR", Class.ElemReduction);
             command.Parameters.AddWithValue("@skills", getSkillsFromList(Class));
             command.ExecuteNonQuery();
-
             return GetById(Class.Id);
         }
 

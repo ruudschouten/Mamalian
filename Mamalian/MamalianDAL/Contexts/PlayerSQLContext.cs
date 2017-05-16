@@ -52,8 +52,10 @@ namespace MamalianDAL.Contexts {
             if (player.Stats == null) throw new NoNullAllowedException("Stats can't be null");
             if (player.Class == null) throw new NoNullAllowedException("Class can't be null");
             SqlConnection con = Database.connection;
+
             string query = "INSERT INTO Player(Name, Gender, Race, Gold, Deaths, HighestWave) VALUES(" +
                            "@name, @gender, @race, @gold, @deaths, @wave)";
+
             SqlCommand command = new SqlCommand(query, con);
             command.Parameters.AddWithValue("@name", player.Name);
             command.Parameters.AddWithValue("@gender", player.Gender.ToString());
@@ -62,8 +64,21 @@ namespace MamalianDAL.Contexts {
             command.Parameters.AddWithValue("@deaths", player.Deaths);
             command.Parameters.AddWithValue("@wave", player.HighestWave);
             command.ExecuteNonQuery();
+            if (player.Id == 0) {
+                query = "SELECT IDENT_CURRENT('Player')";
+                var cmd = new SqlCommand(query, con);
+                var id = cmd.ExecuteScalar();
+                player.Id = Convert.ToInt32(id);
+            }
+            if (player.Class.Id == 0) {
+                player.Class.Id = player.Id;
+                player.Class = new Repository<Class>(new ClassSQLContext()).Insert(player.Class);
+            }
+//            SetClassLink(player);
+            if (player.Stats.Id == 0) {
+                player.Stats = new Repository<Stats>(new StatsSQLContext()).Insert(player.Stats);
+            }
             SetStatLink(player);
-            SetClassLink(player);
 
             return GetById(player.Id);
         }
