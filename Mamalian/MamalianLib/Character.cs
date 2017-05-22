@@ -29,8 +29,9 @@ namespace MamalianLib {
         public abstract void Attack(Enemy e);
 
         public int CalculateDamage(int physD, int elemD, int physR, int elemR) {
-            var phys = physD - physR;
-            var elem = elemD - elemR;
+            int phys = 0, elem = 0;
+            if(physD != 0) phys = physD - physR;
+            if(elemD != 0) elem = elemD - elemR;
             var total = phys + elem;
             if (total < 1) {
                 return 0;
