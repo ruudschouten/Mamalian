@@ -55,6 +55,22 @@ namespace MamalianLib {
             }
         }
 
+        public override void Attack(Player p) {
+            p.Stats.Health -= CalculateDamage(Class.PhysDamage, Class.ElemDamage, p.Class.PhysReduction, p.Class.ElemReduction);
+        }
+
+        public override void Attack(Enemy e) {
+            e.Stats.Health -= CalculateDamage(Class.PhysDamage, Class.ElemDamage, e.PhysReduction, e.ElemReduction);
+        }
+
+        public override void Defend(Player p) {
+            p.Stats.Health -= CalculateDamage(p.Class.PhysDamage, p.Class.ElemDamage, Class.PhysReduction, Class.ElemReduction);
+        }
+
+        public override void Defend(Enemy e) {
+            e.Stats.Health -= CalculateDamage(e.PhysDamage, e.ElemDamage, Class.PhysReduction, Class.ElemReduction);
+        }
+
         public override string ToString() {
             return $"Name: {Name}\n" +
                    $"Stats________\n{Stats}\n" +

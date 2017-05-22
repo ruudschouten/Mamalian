@@ -24,5 +24,27 @@ namespace MamalianLib {
         public Gender Gender { get; set; }
         public Race Race { get; set; }
         public Stats Stats { get; set; }
+
+        public abstract void Attack(Player p);
+        public abstract void Attack(Enemy e);
+        public abstract void Defend(Player p);
+        public abstract void Defend(Enemy e);
+
+        public int CalculateDamage(int physD, int elemD, int physR, int elemR) {
+            var phys = physD - physR;
+            var elem = elemD - elemR;
+            var total = phys + elem;
+            if (total < 1) {
+                return 0;
+            }
+            return total;
+        }
+
+        public bool IsDead() {
+            if (Stats.Health < 1) {
+                return true;
+            }
+            return false;
+        }
     }
 }
