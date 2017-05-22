@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using MamalianASP.Models;
 using MamalianDAL;
 using MamalianDAL.Contexts;
@@ -12,17 +13,22 @@ using MamalianLib;
 
 namespace MamalianASP.Controllers {
     public class GameController : Controller {
+        private int playerId;
         // GET: Game
         public ActionResult Character() {
             return View();
         }
 
         public ActionResult Select() {
-            return View(new PlayerSQLContext().GetAll());
+            return View(new CharacterSelectModel());
         }
 
-        public ActionResult Play(Player p) {
-            return View(new PlayerSQLContext().GetById(p.Id));
+        public ActionResult Play(int id) {
+            Player p = new Repository<Player>(new PlayerSQLContext()).GetById(id);
+            if (p != null) {
+                return View(p);
+            }
+            return Content("Please enter an existing ID");
         }
 
         [HttpPost]
@@ -64,7 +70,23 @@ namespace MamalianASP.Controllers {
             Player p = new Player(name, gender, race, c.ToString(), strength, dexterity, intelligence);
             var repo = new Repository<Player>(new PlayerSQLContext());
             Player player = repo.Insert(p);
-            return Content("Succesfully inserted\n" + player.ToString());
+            playerId = player.Id;
+            return RedirectToAction("CreatedPlayer", "Game", new {id = player.Id});
+        }
+
+        public ActionResult CreatedPlayer(int id) {
+            var repo = new Repository<Player>(new PlayerSQLContext());
+            Player p = repo.GetById(id);
+            var select = new CharacterSelectModel();
+            select.SelectedPlayer = p;
+            select.SelectedPlayerId = p.Id;
+            playerId = p.Id;
+            return View(select);
+        }
+
+        [HttpPost]
+        public ActionResult StartPlaying(CharacterSelectModel model) {
+            return RedirectToAction("Play", "Game", new {Id = model.SelectedPlayerId});
         }
     }
 }
