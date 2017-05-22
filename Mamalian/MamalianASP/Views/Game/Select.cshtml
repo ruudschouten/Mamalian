@@ -1,38 +1,10 @@
-﻿@using MamalianLib;
-@using MamalianDAL;
-@using MamalianDAL.Contexts
+﻿@model MamalianASP.Models.CharacterSelectModel
 
-@functions {
-    private int getSelectedPlayer() {
-        //TODO: Make this an actual method to get selected player
-        return 3;
-    }
+@using (Html.BeginForm("StartPlaying", "Game", FormMethod.Post)) {
+    <h2>Character Select</h2>
+    @Html.DropDownListFor(m => m.SelectedPlayerId, Model.GetPlayers())
+    
+    <p style="margin-top: 12px">
+        <input class="btn btn-default" id="btnSubmit" type="submit" value="Submit" />
+    </p>
 }
-@{
-    ViewBag.Title = "Select";
-    Player selectedPlayer = new Player();
-
-    List<SelectListItem> players = new List<SelectListItem>();
-    players.Add(new SelectListItem());
-    foreach (var player in new PlayerSQLContext().GetAll()) {
-        players.Add(new SelectListItem {
-            Text = player.Name,
-            Value = player.Id.ToString()
-        });
-    }
-}
-
-<script type="text/javascript" language="javascript">
-    function getSelectedPlayer() {
-        var e = document.getElementById("ddPlayers");
-        var value = e.options[e.selectedIndex].value;
-        @selectedPlayer = value;
-    }
-</script>
-<h2>Character Select</h2>
-    @Html.DropDownList("ddPlayers", players)
-
-<p><a style="margin-top: 8px" class="btn btn-default" id="statIntAdd"
-      href="@Url.Action("Play", "Game", new{@id = getSelectedPlayer()})">
-    Start playing
-</a></p>
