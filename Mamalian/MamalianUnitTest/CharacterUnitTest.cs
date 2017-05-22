@@ -86,7 +86,6 @@ namespace MamalianUnitTest {
             Assert.AreNotEqual(e.Stats.Health, ePreviousHealth, "Enemy wasn't damaged");
             e.Attack(p);
             Assert.AreNotEqual(p.Stats.Health, pPreviousHealth, "Player wasn't damaged");
-
         }
     }
 }
