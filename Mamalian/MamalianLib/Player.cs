@@ -63,6 +63,10 @@ namespace MamalianLib {
             e.Stats.Health -= CalculateDamage(Class.PhysDamage, Class.ElemDamage, e.PhysReduction, e.ElemReduction);
         }
 
+        public void Attack(Enemy e, Weapon w) {
+            e.Stats.Health -= CalculateDamage(w.PhysDamage + Class.PhysDamage, w.ElemDamage + Class.ElemDamage, e.PhysReduction, e.ElemReduction);
+        }
+
         public override string ToString() {
             return $"Name: {Name}\n" +
                    $"Stats________\n{Stats}\n" +
