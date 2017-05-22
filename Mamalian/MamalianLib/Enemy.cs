@@ -48,14 +48,6 @@ namespace MamalianLib {
             e.Stats.Health -= CalculateDamage(PhysDamage, ElemDamage, e.PhysReduction, e.ElemReduction);
         }
 
-        public override void Defend(Player p) {
-            p.Stats.Health -= CalculateDamage(p.Class.PhysDamage, p.Class.ElemDamage, PhysReduction, ElemReduction);
-        }
-
-        public override void Defend(Enemy e) {
-            e.Stats.Health -= CalculateDamage(e.PhysDamage, e.ElemDamage, PhysReduction, ElemReduction);
-        }
-
         public override string ToString() {
             return $"Name: {Name}\n" +
                    $"Stats________\n{Stats}\n" +
