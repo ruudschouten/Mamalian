@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "Created Player";
+}
+
+@model MamalianASP.Models.CharacterSelectModel
+
+@using (Html.BeginForm("Select", "Game", FormMethod.Post)) {
+    <h2>Created Character</h2>
+    <p>Succesfully created @Html.Label(Model.SelectedPlayer.Name)</p>
+    <input class="btn btn-default" type="submit" value="Start playing with this character"/>
+}
