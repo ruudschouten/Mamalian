@@ -12,7 +12,7 @@ using MamalianLib;
 
 namespace MamalianASP.Controllers {
     public class PlayersController : ApiController {
-        public IEnumerable<PlayerModel> GetAllProducts() {
+        public IEnumerable<PlayerModel> GetAllPlayers() {
             var repo = new Repository<Player>(new PlayerSQLContext());
             var players = repo.GetAll();
             IEnumerable<PlayerModel> list = players.Select(p => new PlayerModel {
