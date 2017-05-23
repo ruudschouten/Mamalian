@@ -159,6 +159,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig2.cs" />
+    <Compile Include="Controllers\ApiViewController.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlayersController.cs" />
@@ -207,6 +208,7 @@
     <Content Include="Views\Game\Play.cshtml" />
     <Content Include="Views\Game\CreatedPlayer.cshtml" />
     <Content Include="Web.Config" />
+    <Content Include="Views\ApiView\Index.cshtml" />
     <None Include="Web.Debug.Config">
       <DependentUpon>Web.Config</DependentUpon>
     </None>
@@ -216,7 +218,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\CharacterSelectModel\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

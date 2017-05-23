@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using MamalianASP.Models.API
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -21,6 +22,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Game", "Game", "Home")</li>
+                    <li>@Html.ActionLink("API", "Index", "ApiView")</li>
                 </ul>
             </div>
         </div>

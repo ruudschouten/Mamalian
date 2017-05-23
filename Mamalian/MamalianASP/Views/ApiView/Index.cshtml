@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "title";
+}
+
+<h2>API</h2>
+
+<div>
+    <div style="margin-bottom: 16px">
+        <p>This page is dedicated to the API.</p>
+        <p> You can call the api using the following code to get all players: </p>
+            <code>@HttpContext.Current.Request.Url.Host/api/players/</code>
+        <p> And you can call the api using the following code to get a player with an Id: </p>
+            <code>@HttpContext.Current.Request.Url.Host/api/players/{id}</code>
+    </div>
+    <p>You can also just click the button below to see all players.</p>
+
+    <p> Show all players in the database. </p>
+    <p>
+        <a class="btn btn-default" runat="server" href="/api/players">Show all players &raquo;</a>
+    </p>
+</div>
