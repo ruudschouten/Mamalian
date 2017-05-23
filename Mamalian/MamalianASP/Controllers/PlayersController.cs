@@ -30,18 +30,23 @@ namespace MamalianASP.Controllers {
 
         public IHttpActionResult GetPlayer(int id) {
             var product = new Repository<Player>(new PlayerSQLContext()).GetById(id);
-            var model = new PlayerModel { 
-                Id = product.Id,
-                Name = product.Name,
-                Class = product.Class.Name,
-                Race = product.Race.ToString(),
-                Gender = product.Gender.ToString(),
-                Gold = product.Gold,
-                Deaths = product.Deaths,
-                HighestWave = product.HighestWave
-            };
-            if (model == null) { return NotFound(); }
-            return Ok(model);
+            if (product != null) {
+                var model = new PlayerModel {
+                    Id = product.Id,
+                    Name = product.Name,
+                    Class = product.Class.Name,
+                    Race = product.Race.ToString(),
+                    Gender = product.Gender.ToString(),
+                    Gold = product.Gold,
+                    Deaths = product.Deaths,
+                    HighestWave = product.HighestWave
+                };
+                if (model == null) {
+                    return NotFound();
+                }
+                return Ok(model);
+            }
+            return NotFound();
         }
     }
 }
