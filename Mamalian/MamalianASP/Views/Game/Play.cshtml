@@ -5,5 +5,69 @@
 @model Player
 
 <h2>Play - @Model.Name</h2>
+<center>
+    <canvas id="canvas" style="border:1px solid #000; width: 800px; height:400px"></canvas>
+</center>
+<script>
+    var canvas = document.getElementById("canvas"),
+        ctx = canvas.getContext("2d");
 
-<p>@Model.Stats.ToString()</p>
+    canvas.width = 800;
+    canvas.height = 400;
+
+    //Player
+    var x = 400,
+        y = 200,
+        velY = 0,
+        velX = 0,
+        speed = 3,
+        friction = 0.75,
+        keys = [];
+
+    function update() {
+        requestAnimationFrame(update);
+        //Up
+        if (keys[38] || keys[87]) { if (velY > -speed) { velY--; } }
+        //Down
+        if (keys[40] || keys[83]) { if (velY < speed) { velY++; } }
+        //Right
+        if (keys[39] || keys[68]) { if (velX < speed) { velX++; } }
+        //Left
+        if (keys[37] || keys[65]) { if (velX > -speed) { velX--; } }
+
+        velY *= friction;
+        y += velY;
+        velX *= friction;
+        x += velX;
+
+        if (x >= 795) {
+            x = 795;
+        } else if (x <= 5) {
+            x = 5;
+        }
+
+        if (y >= 395) {
+            y = 395;
+        } else if (y < 5) {
+            y = 5;
+        }
+
+        ctx.clearRect(0, 0, 800, 400);
+        ctx.beginPath();
+        ctx.arc(x, y, 5, 0, Math.PI * 2);
+        ctx.fill();
+    }
+
+    update();
+
+    document.body.addEventListener("keydown", function (e) { keys[e.keyCode] = true; });
+    document.body.addEventListener("keyup", function (e) { keys[e.keyCode] = false; });
+</script>
+@*<div style="text-align: left; margin-left: 4px">
+        <p style="margin: 0 0 -10px 0;"> <label>Level: @Model.Stats.Level</label> </p>
+        <p style="margin: -10px 0 -10px 0;"> <label>Health: @Model.CurrentHealth/@Model.Stats.Health</label></p>
+        <p style="margin: -10px 0 -10px 0;"> <label>Spirit: @Model.Stats.Spirit</label> </p>
+        <p style="margin: -10px 0 -10px 0;"> <label>Strength: @Model.Stats.Strength</label> </p>
+        <p style="margin: -10px 0 -10px 0;"> <label>Dexterity: @Model.Stats.Dexterity</label> </p>
+        <p style="margin: -10px 0 -10px 0;"> <label>Intelligence: @Model.Stats.Intelligence</label> </p>
+    </div>*@
