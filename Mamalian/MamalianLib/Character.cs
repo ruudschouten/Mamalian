@@ -24,6 +24,7 @@ namespace MamalianLib {
         public Gender Gender { get; set; }
         public Race Race { get; set; }
         public Stats Stats { get; set; }
+        public int CurrentHealth { get; set; }
 
         public abstract void Attack(Player p);
         public abstract void Attack(Enemy e);

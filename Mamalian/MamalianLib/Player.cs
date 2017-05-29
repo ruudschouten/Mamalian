@@ -14,7 +14,6 @@ namespace MamalianLib {
         public int Deaths { get; set; }
         public int HighestWave { get; set; }
         public List<Item> Inventory { get; set; } = new List<Item>();
-
         public Player() { }
 
         public Player(int id, string name, Gender gender, Race race, int gold, int deaths, int highestWave) {
@@ -37,6 +36,7 @@ namespace MamalianLib {
             Gold = gold;
             Deaths = deaths;
             HighestWave = highestWave;
+            CurrentHealth = stats.Health;
         }
 
         public Player(string name, Gender gender, Race race, string className, int str, int dex, int intl) {
@@ -53,18 +53,19 @@ namespace MamalianLib {
                 Class = new Class(className, 0, 0, 10, 5);
                 Class.AssignSkills("Frozen Touch");
             }
+            CurrentHealth = Stats.Health;
         }
 
         public override void Attack(Player p) {
-            p.Stats.Health -= CalculateDamage(Class.PhysDamage, Class.ElemDamage, p.Class.PhysReduction, p.Class.ElemReduction);
+            p.CurrentHealth -= CalculateDamage(Class.PhysDamage, Class.ElemDamage, p.Class.PhysReduction, p.Class.ElemReduction);
         }
 
         public override void Attack(Enemy e) {
-            e.Stats.Health -= CalculateDamage(Class.PhysDamage, Class.ElemDamage, e.PhysReduction, e.ElemReduction);
+            e.CurrentHealth -= CalculateDamage(Class.PhysDamage, Class.ElemDamage, e.PhysReduction, e.ElemReduction);
         }
 
         public void Attack(Enemy e, Weapon w) {
-            e.Stats.Health -= CalculateDamage(w.PhysDamage + Class.PhysDamage, w.ElemDamage + Class.ElemDamage, e.PhysReduction, e.ElemReduction);
+            e.CurrentHealth -= CalculateDamage(w.PhysDamage + Class.PhysDamage, w.ElemDamage + Class.ElemDamage, e.PhysReduction, e.ElemReduction);
         }
 
         public override string ToString() {

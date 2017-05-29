@@ -32,6 +32,7 @@ namespace MamalianLib {
             PhysReduction = physR;
             ElemDamage = elemD;
             ElemReduction = elemR;
+            CurrentHealth = stats.Health;
             if (PhysDamage + ElemDamage == 0) {
                 throw new Exception("Enemy needs to deal damage");
             }
@@ -41,14 +42,14 @@ namespace MamalianLib {
         }
 
         public override void Attack(Player p) {
-            p.Stats.Health -= CalculateDamage(PhysDamage, ElemDamage, p.Class.PhysReduction, p.Class.ElemReduction);
+            p.CurrentHealth -= CalculateDamage(PhysDamage, ElemDamage, p.Class.PhysReduction, p.Class.ElemReduction);
         }
 
         public override void Attack(Enemy e) {
-            e.Stats.Health -= CalculateDamage(PhysDamage, ElemDamage, e.PhysReduction, e.ElemReduction);
+            e.CurrentHealth -= CalculateDamage(PhysDamage, ElemDamage, e.PhysReduction, e.ElemReduction);
         }
         public void Attack(Player p, Armour a) {
-            p.Stats.Health -= CalculateDamage(PhysDamage, ElemDamage, p.Class.PhysReduction + a.PhysReduction, p.Class.ElemReduction + a.ElemReduction);
+            p.CurrentHealth -= CalculateDamage(PhysDamage, ElemDamage, p.Class.PhysReduction + a.PhysReduction, p.Class.ElemReduction + a.ElemReduction);
         }
 
         public override string ToString() {
