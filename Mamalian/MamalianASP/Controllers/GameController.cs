@@ -8,7 +8,8 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using MamalianASP.Models;
 using MamalianDAL;
-using MamalianDAL.Contexts;
+using MamalianDAL.Logic;
+using MamalianDAL.Repo;
 using MamalianLib;
 
 namespace MamalianASP.Controllers {
@@ -24,7 +25,7 @@ namespace MamalianASP.Controllers {
         }
 
         public ActionResult Play(int id) {
-            Player p = new Repository<Player>(new PlayerSQLContext()).GetById(id);
+            Player p = new PlayerRepository(new PlayerSQLContext()).GetById(id);
             if (p != null) {
                 return View(p);
             }
@@ -68,14 +69,14 @@ namespace MamalianASP.Controllers {
                     break;
             }
             Player p = new Player(name, gender, race, c.ToString(), strength, dexterity, intelligence);
-            var repo = new Repository<Player>(new PlayerSQLContext());
+            var repo = new PlayerRepository(new PlayerSQLContext());
             Player player = repo.Insert(p);
             playerId = player.Id;
             return RedirectToAction("CreatedPlayer", "Game", new {id = player.Id});
         }
 
         public ActionResult CreatedPlayer(int id) {
-            var repo = new Repository<Player>(new PlayerSQLContext());
+            var repo = new PlayerRepository(new PlayerSQLContext());
             Player p = repo.GetById(id);
             var select = new CharacterSelectModel();
             select.SelectedPlayer = p;

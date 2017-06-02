@@ -43,22 +43,43 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contexts\ArmourSQLContext.cs" />
-    <Compile Include="Contexts\ClassSQLContext.cs" />
-    <Compile Include="Contexts\InventorySQLContext.cs" />
-    <Compile Include="Contexts\PotionSQLContext.cs" />
-    <Compile Include="Contexts\PowerUpSQLContext.cs" />
-    <Compile Include="Contexts\WaveSQLContext.cs" />
-    <Compile Include="Contexts\WeaponSQLContext.cs" />
-    <Compile Include="Database.cs" />
-    <Compile Include="Contexts\EnemySQLContext.cs" />
-    <Compile Include="IContext.cs" />
-    <Compile Include="InventoryRepository.cs" />
-    <Compile Include="Repository.cs" />
-    <Compile Include="Contexts\PlayerSQLContext.cs" />
-    <Compile Include="Contexts\StatsSQLContext.cs" />
+    <Compile Include="Data\IArmourContext.cs" />
+    <Compile Include="Data\IClassContext.cs" />
+    <Compile Include="Data\IEnemyContext.cs" />
+    <Compile Include="Data\IInventoryContext.cs" />
+    <Compile Include="Data\IPlayerContext.cs" />
+    <Compile Include="Data\IPotionContext.cs" />
+    <Compile Include="Data\IPowerUpContext.cs" />
+    <Compile Include="Data\IStatsContext.cs" />
+    <Compile Include="Data\ITeamContext.cs" />
+    <Compile Include="Data\IWaveContext.cs" />
+    <Compile Include="Data\IWeaponContext.cs" />
+    <Compile Include="Logic\ArmourSQLContext.cs" />
+    <Compile Include="Logic\ClassSQLContext.cs" />
+    <Compile Include="Logic\InventorySQLContext.cs" />
+    <Compile Include="Logic\PotionSQLContext.cs" />
+    <Compile Include="Logic\PowerUpSQLContext.cs" />
+    <Compile Include="Logic\WaveSQLContext.cs" />
+    <Compile Include="Logic\WeaponSQLContext.cs" />
+    <Compile Include="Data\Database.cs" />
+    <Compile Include="Logic\EnemySQLContext.cs" />
+    <Compile Include="Data\IContext.cs" />
+    <Compile Include="Repo\ArmourRepository.cs" />
+    <Compile Include="Repo\ClassRepository.cs" />
+    <Compile Include="Repo\EnemyRepository.cs" />
+    <Compile Include="Repo\InventoryRepository.cs" />
+    <Compile Include="Logic\PlayerSQLContext.cs" />
+    <Compile Include="Logic\StatsSQLContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Contexts\TeamSQLContext.cs" />
+    <Compile Include="Logic\TeamSQLContext.cs" />
+    <Compile Include="Repo\PlayerRepository.cs" />
+    <Compile Include="Repo\PotionRepository.cs" />
+    <Compile Include="Repo\PowerUpRepository.cs" />
+    <Compile Include="Repo\StatsRepository.cs" />
+    <Compile Include="Repo\TeamRepository.cs" />
+    <Compile Include="Repo\WaveRepository.cs" />
+    <Compile Include="Repo\WeaponRepository.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

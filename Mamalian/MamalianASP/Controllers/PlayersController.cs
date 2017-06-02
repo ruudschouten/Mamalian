@@ -1,4 +1,5 @@
-﻿using System;
+﻿   
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -7,13 +8,14 @@ using System.Web.Http;
 using MamalianASP.Models;
 using MamalianASP.Models.API;
 using MamalianDAL;
-using MamalianDAL.Contexts;
+using MamalianDAL.Logic;
+using MamalianDAL.Repo;
 using MamalianLib;
 
 namespace MamalianASP.Controllers {
     public class PlayersController : ApiController {
         public IEnumerable<PlayerModel> GetAllPlayers() {
-            var repo = new Repository<Player>(new PlayerSQLContext());
+            var repo = new PlayerRepository(new PlayerSQLContext());
             var players = repo.GetAll();
             IEnumerable<PlayerModel> list = players.Select(p => new PlayerModel {
                 Id = p.Id,
@@ -29,7 +31,7 @@ namespace MamalianASP.Controllers {
         }
 
         public IHttpActionResult GetPlayer(int id) {
-            var product = new Repository<Player>(new PlayerSQLContext()).GetById(id);
+            var product = new PlayerRepository(new PlayerSQLContext()).GetById(id);
             if (product != null) {
                 var model = new PlayerModel {
                     Id = product.Id,

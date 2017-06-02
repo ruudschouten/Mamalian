@@ -3,29 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MamalianDAL.Data;
 using MamalianLib;
 
-namespace MamalianDAL {
-    public class Repository<T> {
-        private IContext<T> context;
-
-        public Repository(IContext<T> context) {
+namespace MamalianDAL.Repo {
+    public class WeaponRepository : IWeaponContext {
+        private IWeaponContext context;
+        public WeaponRepository(IWeaponContext context) {
             this.context = context;
         }
-
-        public List<T> GetAll() {
+        public List<Weapon> GetAll() {
             return context.GetAll();
         }
 
-        public T GetById(int id) {
+        public Weapon GetById(int id) {
             return context.GetById(id);
         }
 
-        public T Insert(T obj) {
+        public Weapon Insert(Weapon obj) {
             return context.Insert(obj);
         }
 
-        public bool Update(T obj) {
+        public bool Update(Weapon obj) {
             return context.Update(obj);
         }
 

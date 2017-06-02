@@ -2,16 +2,22 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+using MamalianDAL.Data;
 using MamalianLib;
 
-namespace MamalianDAL.Contexts {
-    public class WaveSQLContext : IContext<Wave> {
+namespace MamalianDAL.Logic {
+    public class WaveSQLContext : IWaveContext {
         public List<Wave> GetAll() {
-            throw new Exception("Use GetById instead, this uses too many connections");
+            List<Wave> result = new List<Wave>();
+            SqlConnection con = Database.connection;
+            string query = "SELECT * FROM Wave";
+            SqlCommand command = new SqlCommand(query, con);
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read()) {
+                result.Add(CreateWaveFromReader(reader));
+            }
+            con.Close();
+            return result;
         }
 
         public List<Enemy> GetAllEnemies(int id) {

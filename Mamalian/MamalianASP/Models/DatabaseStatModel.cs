@@ -4,14 +4,15 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MamalianDAL;
-using MamalianDAL.Contexts;
+using MamalianDAL.Logic;
+using MamalianDAL.Repo;
 using MamalianLib;
 
 namespace MamalianASP.Models {
     public class DatabaseStatModel {
         public int SelectedId { get; set; }
         public IEnumerable<SelectListItem> GetStats() {
-            var repo = new Repository<Stats>(new StatsSQLContext());
+            var repo = new StatsRepository(new StatsSQLContext());
             var roles = repo.GetAll().Select(x => new SelectListItem {
                 Value = x.Id.ToString(),
                 Text = x.ToReadableString()

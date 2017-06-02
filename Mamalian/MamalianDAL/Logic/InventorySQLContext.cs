@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MamalianDAL.Data;
 using MamalianLib;
 
-namespace MamalianDAL.Contexts {
-    public class InventorySQLContext {
+namespace MamalianDAL.Logic {
+    public class InventorySQLContext : IInventoryContext {
         public List<Item> GetInventory(Player p) {
             List<Item> inventory = new List<Item>();
             foreach (var weapon in GetWeaponInventory(p)) {
@@ -22,7 +19,7 @@ namespace MamalianDAL.Contexts {
             return inventory;
         }
 
-        private List<Weapon> GetWeaponInventory(Player p) {
+        public List<Weapon> GetWeaponInventory(Player p) {
             List<Weapon> result = new List<Weapon>();
             SqlConnection con = Database.connection;
             string query = "SELECT * FROM Inventory " +
@@ -38,7 +35,7 @@ namespace MamalianDAL.Contexts {
             return result;
         }
 
-        private List<Armour> GetArmourInventory(Player p) {
+        public List<Armour> GetArmourInventory(Player p) {
             List<Armour> result = new List<Armour>();
             SqlConnection con = Database.connection;
             string query = "SELECT * FROM Inventory " +
@@ -54,7 +51,7 @@ namespace MamalianDAL.Contexts {
             return result;
         }
 
-        private List<Potion> GetPotionInventory(Player p) {
+        public List<Potion> GetPotionInventory(Player p) {
             List<Potion> result = new List<Potion>();
             SqlConnection con = Database.connection;
             string query = "SELECT " +

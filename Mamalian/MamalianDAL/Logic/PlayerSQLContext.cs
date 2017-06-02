@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Net.Sockets;
+using MamalianDAL.Data;
+using MamalianDAL.Repo;
 using MamalianLib;
 
-namespace MamalianDAL.Contexts {
-    public class PlayerSQLContext : IContext<Player> {
+namespace MamalianDAL.Logic {
+    public class PlayerSQLContext : IPlayerContext {
 
         public List<Player> GetAll() {
             List<Player> result = new List<Player>();
@@ -72,11 +73,11 @@ namespace MamalianDAL.Contexts {
             }
             if (player.Class.Id == 0) {
                 player.Class.Id = player.Id;
-                player.Class = new Repository<Class>(new ClassSQLContext()).Insert(player.Class);
+                player.Class = new ClassRepository(new ClassSQLContext()).Insert(player.Class);
             }
 //            SetClassLink(player);
             if (player.Stats.Id == 0) {
-                player.Stats = new Repository<Stats>(new StatsSQLContext()).Insert(player.Stats);
+                player.Stats = new StatsRepository(new StatsSQLContext()).Insert(player.Stats);
             }
             SetStatLink(player);
 

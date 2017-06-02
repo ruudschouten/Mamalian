@@ -2,9 +2,9 @@
 @{
     ViewBag.Title = "Play";
 }
-@model Player
+@model MamalianASP.Models.CharacterPlayModel
 
-<h2>Play - @Model.Name</h2>
+<h2>Play - @Model.Player.Name</h2>
 <center>
     <canvas id="canvas" style="border:1px solid #000; width: 1000px; height:400px"></canvas>
 </center>
@@ -12,11 +12,18 @@
     var canvas = document.getElementById("canvas"), ctx = canvas.getContext("2d");
     var player = new Player(120, 400, 200, 3, 0.75);
     var enemy = new Enemy(50, 5, 20);
-
     var maxWidth = 1000;
     var maxHeight = 400;
     canvas.height = maxHeight;
     canvas.width = maxWidth;
+
+    var wave = 1;
+    var waves;
+    var enemies;
+
+    function GetEnemies() {
+        waves = @Html.Raw(Json.Encode(Model.WaveRepo.GetAll()));
+    }
 
     function Point(x, y) {
         this.x = x;
@@ -65,7 +72,7 @@
                 if (this.reach.contains(enemy.hitbox)) {
                     alert("Player made contact");
                     this.Attack(enemy);
-                    this.currentAttackSpeed = this.attackSpeed;   
+                    this.currentAttackSpeed = this.attackSpeed;
                 }
             }
         }
@@ -97,7 +104,7 @@
     Player.prototype.Attack = function(enemy) {
         //TODO: Do a attack
     }
-   
+
     //Enemies
     function Enemy(health, x, y) {
         this.health = health;
@@ -147,7 +154,7 @@
             if (this.reach.contains(player.hitbox)) {
                 alert("Enemy made contact");
                 this.attackSpeed = 90;
-            }   
+            }
         }
         this.x = Math.round(this.x + this.velX);
         this.y = Math.round(this.y + this.velY);
@@ -155,7 +162,7 @@
     Enemy.prototype.Attack = function(player) {
         //Damage player
     }
-    
+
     function update() {
         requestAnimationFrame(update);
         player.Update(enemy);
@@ -178,10 +185,10 @@
     document.body.addEventListener("keyup", function (e) { player.keys[e.keyCode] = false; });
 </script>
 <div style="text-align: left; margin-left: 4px">
-    <p style="margin: 0 0 -10px 0;"> <label>Level: @Model.Stats.Level</label> </p>
-    <p style="margin: -10px 0 -10px 0;"> <label>Health: @Model.CurrentHealth/@Model.Stats.Health</label></p>
-    <p style="margin: -10px 0 -10px 0;"> <label>Spirit: @Model.Stats.Spirit</label> </p>
-    <p style="margin: -10px 0 -10px 0;"> <label>Strength: @Model.Stats.Strength</label> </p>
-    <p style="margin: -10px 0 -10px 0;"> <label>Dexterity: @Model.Stats.Dexterity</label> </p>
-    <p style="margin: -10px 0 -10px 0;"> <label>Intelligence: @Model.Stats.Intelligence</label> </p>
+    <p style="margin: 0 0 -10px 0;"> <label>Level: @Model.Player.Stats.Level</label> </p>
+    <p style="margin: -10px 0 -10px 0;"> <label>Health: @Model.Player.CurrentHealth/@Model.Player.Stats.Health</label></p>
+    <p style="margin: -10px 0 -10px 0;"> <label>Spirit: @Model.Player.Stats.Spirit</label> </p>
+    <p style="margin: -10px 0 -10px 0;"> <label>Strength: @Model.Player.Stats.Strength</label> </p>
+    <p style="margin: -10px 0 -10px 0;"> <label>Dexterity: @Model.Player.Stats.Dexterity</label> </p>
+    <p style="margin: -10px 0 -10px 0;"> <label>Intelligence: @Model.Player.Stats.Intelligence</label> </p>
 </div>

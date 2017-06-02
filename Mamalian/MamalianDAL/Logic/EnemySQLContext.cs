@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MamalianDAL.Data;
 using MamalianLib;
 
-namespace MamalianDAL.Contexts {
-    public class EnemySQLContext : IContext<Enemy> {
+namespace MamalianDAL.Logic {
+    public class EnemySQLContext : IEnemyContext {
         public List<Enemy> GetAll() {
             List<Enemy> result = new List<Enemy>();
             SqlConnection con = Database.connection;

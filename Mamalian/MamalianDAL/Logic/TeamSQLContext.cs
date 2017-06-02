@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using MamalianDAL.Data;
 using MamalianLib;
 
-namespace MamalianDAL.Contexts {
-    public class TeamSQLContext : IContext<Team> {
+namespace MamalianDAL.Logic {
+    public class TeamSQLContext : ITeamContext {
         public List<Team> GetAll() {
             List<Team> result = new List<Team>();
             SqlConnection con = Database.connection;

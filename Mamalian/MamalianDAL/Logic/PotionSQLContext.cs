@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MamalianDAL.Data;
 using MamalianLib;
 
-namespace MamalianDAL.Contexts {
-    public class PotionSQLContext : IContext<Potion> {
+namespace MamalianDAL.Logic {
+    public class PotionSQLContext : IPotionContext {
         public List<Potion> GetAll() {
             List<Potion> result = new List<Potion>();
             SqlConnection con = Database.connection;

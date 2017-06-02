@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MamalianDAL;
-using MamalianDAL.Contexts;
+using MamalianDAL.Logic;
+using MamalianDAL.Repo;
 using MamalianLib;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -13,20 +14,20 @@ namespace IntegrationUnitTests {
     public class ClassIntegrationTest {
         [TestMethod]
         public void ClassSelect() {
-            Repository<Class> repo = new Repository<Class>(new ClassSQLContext());
+            ClassRepository repo = new ClassRepository(new ClassSQLContext());
             Class c = repo.GetById(1);
             Assert.IsNotNull(c, "Class wasn't correctly retrieved");
         }
         [TestMethod]
         public void ClassesSelect() {
-            Repository<Class> repo = new Repository<Class>(new ClassSQLContext());
+            ClassRepository repo = new ClassRepository(new ClassSQLContext());
             List<Class> c = repo.GetAll();
             Assert.IsNotNull(c, "Classes weren't correctly retrieved");
         }
 
         [TestMethod]
         public void UpdateClass() {
-            Repository<Class> repo = new Repository<Class>(new ClassSQLContext());
+            ClassRepository repo = new ClassRepository(new ClassSQLContext());
             Class c = repo.GetById(2);
             c.PhysDamage += 20;
             int damage = c.PhysDamage;

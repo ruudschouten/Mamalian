@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MamalianDAL.Data;
 using MamalianLib;
 
-namespace MamalianDAL.Contexts {
-    public class WeaponSQLContext: IContext<Weapon> {
+namespace MamalianDAL.Logic {
+    public class WeaponSQLContext: IWeaponContext {
         public List<Weapon> GetAll() {
             List<Weapon> result = new List<Weapon>();
             SqlConnection con = Database.connection;

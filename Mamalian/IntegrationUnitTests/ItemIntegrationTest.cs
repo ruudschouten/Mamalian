@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MamalianDAL;
-using MamalianDAL.Contexts;
+using MamalianDAL.Logic;
+using MamalianDAL.Repo;
 using MamalianLib;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -22,20 +23,20 @@ namespace IntegrationUnitTests {
         #region Weapon
         [TestMethod]
         public void WeaponSelect() {
-            Repository<Weapon> repo = new Repository<Weapon>(new WeaponSQLContext());
+            WeaponRepository repo = new WeaponRepository(new WeaponSQLContext());
             Weapon c = repo.GetById(4);
             Assert.IsNotNull(c, "Weapon wasn't correctly retrieved");
         }
         [TestMethod]
         public void WeaponsSelect() {
-            Repository<Weapon> repo = new Repository<Weapon>(new WeaponSQLContext());
+            WeaponRepository repo = new WeaponRepository(new WeaponSQLContext());
             List<Weapon> c = repo.GetAll();
             Assert.IsNotNull(c, "Weapons weren't correctly retrieved");
         }
 
         [TestMethod]
         public void UpdateWeapon() {
-            Repository<Weapon> repo = new Repository<Weapon>(new WeaponSQLContext());
+            WeaponRepository repo = new WeaponRepository(new WeaponSQLContext());
             Weapon c = repo.GetById(4);
             c.PhysDamage += 20;
             int damage = c.PhysDamage;
@@ -49,20 +50,20 @@ namespace IntegrationUnitTests {
         #region Armour
         [TestMethod]
         public void ArmourSelect() {
-            Repository<Armour> repo = new Repository<Armour>(new ArmourSQLContext());
+            ArmourRepository repo = new ArmourRepository(new ArmourSQLContext());
             Armour c = repo.GetById(3);
             Assert.IsNotNull(c, "Armour wasn't correctly retrieved");
         }
         [TestMethod]
         public void ArmoursSelect() {
-            Repository<Armour> repo = new Repository<Armour>(new ArmourSQLContext());
+            ArmourRepository repo = new ArmourRepository(new ArmourSQLContext());
             List<Armour> c = repo.GetAll();
             Assert.IsNotNull(c, "Armours weren't correctly retrieved");
         }
 
         [TestMethod]
         public void UpdateArmour() {
-            Repository<Armour> repo = new Repository<Armour>(new ArmourSQLContext());
+            ArmourRepository repo = new ArmourRepository(new ArmourSQLContext());
             Armour c = repo.GetById(3);
             c.PhysReduction += 20;
             int reduction = c.PhysReduction;
@@ -76,20 +77,20 @@ namespace IntegrationUnitTests {
         #region Potion
         [TestMethod]
         public void PotionSelect() {
-            Repository<Potion> repo = new Repository<Potion>(new PotionSQLContext());
+            PotionRepository repo = new PotionRepository(new PotionSQLContext());
             Potion c = repo.GetById(1);
             Assert.IsNotNull(c, "Potion wasn't correctly retrieved");
         }
         [TestMethod]
         public void PotionsSelect() {
-            Repository<Potion> repo = new Repository<Potion>(new PotionSQLContext());
+            PotionRepository repo = new PotionRepository(new PotionSQLContext());
             List<Potion> c = repo.GetAll();
             Assert.IsNotNull(c, "Potions weren't correctly retrieved");
         }
 
         [TestMethod]
         public void UpdatePotion() {
-            Repository<Potion> repo = new Repository<Potion>(new PotionSQLContext());
+            PotionRepository repo = new PotionRepository(new PotionSQLContext());
             Potion c = repo.GetById(1);
             c.Stats.Spirit += 20;
             int spirit = c.Stats.Spirit;
