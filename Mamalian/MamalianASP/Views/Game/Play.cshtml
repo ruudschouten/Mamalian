@@ -6,68 +6,184 @@
 
 <h2>Play - @Model.Name</h2>
 <center>
-    <canvas id="canvas" style="border:1px solid #000; width: 800px; height:400px"></canvas>
+    <canvas id="canvas" style="border:1px solid #000; width: 1000px; height:400px"></canvas>
 </center>
 <script>
-    var canvas = document.getElementById("canvas"),
-        ctx = canvas.getContext("2d");
+    var canvas = document.getElementById("canvas"), ctx = canvas.getContext("2d");
+    var player = new Player(120, 400, 200, 3, 0.75);
+    var enemy = new Enemy(50, 5, 20);
 
-    canvas.width = 800;
-    canvas.height = 400;
+    var maxWidth = 1000;
+    var maxHeight = 400;
+    canvas.height = maxHeight;
+    canvas.width = maxWidth;
+
+    function Point(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    function Rectangle(x, y, w, h) {
+        this.left = x;
+        this.top = y;
+        this.right = x + w;
+        this.bottom = y + h;
+        this.center = new Point(this.left + (this.right - this.left) / 2, this.top + (this.bottom - this.top) / 2);
+    }
+    Rectangle.prototype.contains = function(other) {
+        return (other.left >= this.left &&
+            other.right <= this.right &&
+            other.top >= this.top &&
+            other.bottom <= this.bottom);
+    }
 
     //Player
-    var x = 400,
-        y = 200,
-        velY = 0,
-        velX = 0,
-        speed = 3,
-        friction = 0.75,
-        keys = [];
+    function Player(health, x, y, speed, friction) {
+        this.health = health;
+        this.x = x;
+        this.y = y;
+        this.velY = 0;
+        this.velX = 0;
+        this.speed = speed;
+        this.friction = friction;
+        this.keys = [];
+        this.currentAttackSpeed = 0;
+        this.attackSpeed = 45;
+        this.rectWidth = 20;
+        this.rectHeight = 20;
+        this.hitboxWidth = 10;
+        this.hitboxHeight = 10;
+        this.reach = new Rectangle(x, y, this.rectWidth, this.rectHeight);
+        this.hitbox = new Rectangle(x, y, this.hitboxWidth, this.hitboxHeight);
+    }
+    Player.prototype.Update = function(enemy) {
+        this.Movement();
+        this.reach = new Rectangle(this.x, this.y, this.rectWidth, this.rectHeight);
+        this.hitbox = new Rectangle(this.x, this.y, this.hitboxWidth, this.hitboxHeight);
+        this.currentAttackSpeed--;
+        if (this.keys[32]) {
+            if (this.currentAttackSpeed <= 0) {
+                if (this.reach.contains(enemy.hitbox)) {
+                    alert("Player made contact");
+                    this.Attack(enemy);
+                    this.currentAttackSpeed = this.attackSpeed;   
+                }
+            }
+        }
+    }
+    Player.prototype.Draw = function () {
+        ctx.fillStyle = "#FF0F0F";
+        ctx.fillRect(this.reach.left, this.reach.top, this.rectWidth, this.rectHeight);
+        ctx.fillStyle = "#FFF000";
+        ctx.fillRect(this.hitbox.left, this.hitbox.top, this.hitboxWidth, this.hitboxHeight);
+        ctx.fillStyle = "#000";
+        ctx.arc(this.x, this.y, 5, 0, Math.PI * 2);
+        ctx.fill();
+    }
+    Player.prototype.Movement = function () {
+        //Up, Down, Left, Right
+        if (this.keys[38] || this.keys[87]) { if (this.velY > -this.speed) { this.velY--; } }
+        if (this.keys[40] || this.keys[83]) { if (this.velY < this.speed) { this.velY++; } }
+        if (this.keys[39] || this.keys[68]) { if (this.velX < this.speed) { this.velX++; } }
+        if (this.keys[37] || this.keys[65]) { if (this.velX > -this.speed) { this.velX--; } }
 
+        this.velY *= this.friction;
+        this.y += this.velY;
+        this.velX *= this.friction;
+        this.x += this.velX;
+
+        if (this.x >= maxWidth - 5) { this.x = maxWidth - 5; } else if (this.x <= 5) { this.x = 5; }
+        if (this.y >= maxHeight - 5) { this.y = maxHeight - 5; } else if (this.y < 5) { this.y = 5; }
+    }
+    Player.prototype.Attack = function() {
+        //TODO: Do a attack
+    }
+   
+    //Enemies
+    function Enemy(health, x, y) {
+        this.health = health;
+        //Movement
+        this.x = x;
+        this.y = y;
+        this.velX = 0;
+        this.velY = 0;
+        this.speed = 2;
+        this.friction = 0.9;
+        this.attackSpeed = 0;
+        this.rectWidth = 20;
+        this.rectHeight = 20;
+        this.hitWidth = 10;
+        this.hitHeight = 10;
+        this.reach = new Rectangle(x - this.rectWidth / (5 / 2), y - this.rectWidth / (5 / 2), this.rectWidth, this.rectHeight);
+        this.hitbox = new Rectangle(x - this.hitWidth / (5 / 2), y - this.hitWidth / (5 / 2), this.hitWidth, this.hitHeight);
+    }
+    Enemy.prototype.Update = function(player) {
+        this.Movement(player);
+        this.reach = new Rectangle(this.x, this.y, this.rectWidth, this.rectHeight);
+        this.hitbox = new Rectangle(this.x, this.y, this.hitWidth, this.hitHeight);
+    }
+    Enemy.prototype.Draw = function () {
+        ctx.fillStyle = "#FF00FF";
+        ctx.fillRect(this.reach.left, this.reach.top, this.rectWidth, this.rectHeight);
+        ctx.fillStyle = "#00FF00";
+        ctx.fillRect(this.hitbox.left, this.hitbox.top, this.hitboxWidth, this.hitboxHeight);
+        ctx.fillStyle = "#FF0000";
+        ctx.fillRect(this.x, this.y, 10, 10);
+    }
+
+    Enemy.prototype.Movement = function (player) {
+        var speedY = this.speed;
+        var speedX = this.speed;
+        //Move up and down
+        if (this.x < player.x) { this.velX = speedX;
+        } else if (this.x > player.x) { this.velX = -speedX;
+        } else { this.velX = 0;
+        }
+        //Move left and right
+        if (this.y < player.y) { this.velY = speedY;
+        } else if (this.y > player.y) { this.velY = -speedY;
+        } else { this.velY = 0;
+        }
+        this.attackSpeed--;
+        if (this.attackSpeed <= 0) {
+            if (this.reach.contains(player.hitbox)) {
+                alert("Enemy made contact");
+                this.attackSpeed = 90;
+            }   
+        }
+        this.x = Math.round(this.x + this.velX);
+        this.y = Math.round(this.y + this.velY);
+    }
+    Enemy.prototype.Attack = function(player) {
+        //Damage player
+    }
+    
     function update() {
         requestAnimationFrame(update);
-        //Up
-        if (keys[38] || keys[87]) { if (velY > -speed) { velY--; } }
-        //Down
-        if (keys[40] || keys[83]) { if (velY < speed) { velY++; } }
-        //Right
-        if (keys[39] || keys[68]) { if (velX < speed) { velX++; } }
-        //Left
-        if (keys[37] || keys[65]) { if (velX > -speed) { velX--; } }
+        player.Update(enemy);
+        enemy.Update(player);
+        Draw();
+    }
 
-        velY *= friction;
-        y += velY;
-        velX *= friction;
-        x += velX;
-
-        if (x >= 795) {
-            x = 795;
-        } else if (x <= 5) {
-            x = 5;
-        }
-
-        if (y >= 395) {
-            y = 395;
-        } else if (y < 5) {
-            y = 5;
-        }
-
-        ctx.clearRect(0, 0, 800, 400);
+    function Draw() {
+        //player
+        ctx.clearRect(0, 0, maxWidth, maxHeight);
         ctx.beginPath();
-        ctx.arc(x, y, 5, 0, Math.PI * 2);
-        ctx.fill();
+        ctx.fillStyle = "#FFFF00";
+        player.Draw();
+        enemy.Draw();
     }
 
     update();
 
-    document.body.addEventListener("keydown", function (e) { keys[e.keyCode] = true; });
-    document.body.addEventListener("keyup", function (e) { keys[e.keyCode] = false; });
+    document.body.addEventListener("keydown", function (e) { player.keys[e.keyCode] = true; });
+    document.body.addEventListener("keyup", function (e) { player.keys[e.keyCode] = false; });
 </script>
-@*<div style="text-align: left; margin-left: 4px">
-        <p style="margin: 0 0 -10px 0;"> <label>Level: @Model.Stats.Level</label> </p>
-        <p style="margin: -10px 0 -10px 0;"> <label>Health: @Model.CurrentHealth/@Model.Stats.Health</label></p>
-        <p style="margin: -10px 0 -10px 0;"> <label>Spirit: @Model.Stats.Spirit</label> </p>
-        <p style="margin: -10px 0 -10px 0;"> <label>Strength: @Model.Stats.Strength</label> </p>
-        <p style="margin: -10px 0 -10px 0;"> <label>Dexterity: @Model.Stats.Dexterity</label> </p>
-        <p style="margin: -10px 0 -10px 0;"> <label>Intelligence: @Model.Stats.Intelligence</label> </p>
-    </div>*@
+<div style="text-align: left; margin-left: 4px">
+    <p style="margin: 0 0 -10px 0;"> <label>Level: @Model.Stats.Level</label> </p>
+    <p style="margin: -10px 0 -10px 0;"> <label>Health: @Model.CurrentHealth/@Model.Stats.Health</label></p>
+    <p style="margin: -10px 0 -10px 0;"> <label>Spirit: @Model.Stats.Spirit</label> </p>
+    <p style="margin: -10px 0 -10px 0;"> <label>Strength: @Model.Stats.Strength</label> </p>
+    <p style="margin: -10px 0 -10px 0;"> <label>Dexterity: @Model.Stats.Dexterity</label> </p>
+    <p style="margin: -10px 0 -10px 0;"> <label>Intelligence: @Model.Stats.Intelligence</label> </p>
+</div>
