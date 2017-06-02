@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Database";
+}
+
+<h2>Index</h2>
+
+
+<div class="row">
+    <div style="margin-bottom: 16px">
+        <p>This page is dedicated to the database functions.</p>
+        <p>You can click on a button below and you'll be send to a page where you can try out some queries.</p>
+        <p>On those pages you will alter the Stats table</p>
+    </div>
+    
+    <div class="col-md-4">
+        <a class="btn btn-default" runat="server" href="@Url.Action("Insert", "Database")">INSERT &raquo;</a>
+        <a class="btn btn-default" runat="server" href="@Url.Action("Update", "Database")">UPDATE &raquo;</a>
+        <a class="btn btn-default" runat="server" href="@Url.Action("Delete", "Database")">DELETE &raquo;</a>
+    </div>
+</div>

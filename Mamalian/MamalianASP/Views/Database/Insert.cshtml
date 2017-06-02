@@ -1,0 +1,40 @@
+﻿@model MamalianASP.Models.DatabaseStatModel
+@{
+    ViewBag.Title = "Insert";
+}
+
+<h2>Insert</h2>
+
+<p>Here, can create a new stat.</p>
+<p>Simply fill in the values you need and click on the button.</p>
+
+@using (Html.BeginForm("InsertFunction", "Database", FormMethod.Post)) {
+    <h2>New stat</h2>
+    <p>
+        <b> @Html.LabelFor(m => m.Level) </b>
+        @Html.TextBoxFor(m => m.Level)
+    </p>
+    <p>
+        <b> @Html.LabelFor(m => m.Health) </b>
+        @Html.TextBoxFor(m => m.Health)
+    </p>
+    <p>
+        <b> @Html.LabelFor(m => m.Spirit) </b>
+        @Html.TextBoxFor(m => m.Spirit)
+    </p>
+    <p>
+        <b> @Html.LabelFor(m => m.Strength) </b>
+        @Html.TextBoxFor(m => m.Strength)
+    </p>
+    <p>
+        <b> @Html.LabelFor(m => m.Dexterity) </b>
+        @Html.TextBoxFor(m => m.Dexterity)
+    </p>
+    <p>
+        <b> @Html.LabelFor(m => m.Intelligence) </b>
+        @Html.TextBoxFor(m => m.Intelligence)
+    </p>
+    <p style="margin-top: 12px">
+        <input class="btn btn-default" id="btnSubmit" type="submit" value="Insert" />
+    </p>
+}

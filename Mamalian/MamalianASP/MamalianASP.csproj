@@ -160,6 +160,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig2.cs" />
     <Compile Include="Controllers\ApiViewController.cs" />
+    <Compile Include="Controllers\DatabaseController.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlayersController.cs" />
@@ -171,6 +172,7 @@
     <Compile Include="Models\API\StatsModel.cs" />
     <Compile Include="Models\CharacterSelectModel.cs" />
     <Compile Include="Models\CharacterViewModel.cs" />
+    <Compile Include="Models\DatabaseStatModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -209,6 +211,10 @@
     <Content Include="Views\Game\CreatedPlayer.cshtml" />
     <Content Include="Web.Config" />
     <Content Include="Views\ApiView\Index.cshtml" />
+    <Content Include="Views\Database\Index.cshtml" />
+    <Content Include="Views\Database\Insert.cshtml" />
+    <Content Include="Views\Database\Update.cshtml" />
+    <Content Include="Views\Database\Delete.cshtml" />
     <None Include="Web.Debug.Config">
       <DependentUpon>Web.Config</DependentUpon>
     </None>

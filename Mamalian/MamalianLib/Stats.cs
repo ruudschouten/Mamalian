@@ -64,5 +64,18 @@ namespace MamalianLib {
             if (s.EndsWith("\n")) s = s.Remove(s.Length - 3);
             return s;
         }
+
+        public string ToReadableString() {
+            string s = "";
+            if (Id != 0) s += $"ID: {Id} - ";
+            if (Level != 0) s += $"LVL: {Level} - ";
+            if (Health != 0) s += $"HP: {Health} - ";
+            if (Spirit != 0) s += $"MP: {Spirit} - ";
+            if (Strength != 0) s += $"STR: {Strength} - ";
+            if (Dexterity != 0) s += $"DEX: {Dexterity} - ";
+            if (Intelligence != 0) s += $"INT: {Intelligence}";
+            if (s.EndsWith("- ")) s = s.Remove(s.Length - 2);
+            return s;
+        }
     }
 }
