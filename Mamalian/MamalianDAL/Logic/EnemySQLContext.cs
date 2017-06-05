@@ -30,8 +30,8 @@ namespace MamalianDAL.Logic {
                            "e.Id as eId, e.Name, e.Gender, e.Race, e.PhysDamage, e.ElemDamage, e.PhysReduction, e.ElemReduction, " +
                            "s.Id as sId, s.Level, s.Experience, s.Health, s.Spirit, s.HealthRegen, s.SpiritRegen, s.Strength, s.Dexterity, s.Intelligence " +
                            "FROM EnemyStats " +
-                           "INNER JOIN Enemy e on EnemyStats.EnemyId = e.Id " +
-                           "INNER JOIN Stats s on EnemyStats.StatsId = s.Id " +
+                           "full JOIN Enemy e on EnemyStats.EnemyId = e.Id " +
+                           "full JOIN Stats s on EnemyStats.StatsId = s.Id " +
                            "WHERE e.Id=@id";
             SqlCommand command = new SqlCommand(query, con);
             command.Parameters.AddWithValue("@id", id);
@@ -115,8 +115,10 @@ namespace MamalianDAL.Logic {
                 Convert.ToInt32(reader["ElemDamage"]),
                 Convert.ToInt32(reader["PhysReduction"]),
                 Convert.ToInt32(reader["ElemReduction"]));
-            Stats s = new StatsSQLContext().GetById(Convert.ToInt32(reader["sId"]));
-            e.Stats = s;
+            if (reader["sId"] != DBNull.Value) {
+                Stats s = new StatsSQLContext().GetById(Convert.ToInt32(reader["sId"]));
+                e.Stats = s;
+            }
             return e;
         }
     }
