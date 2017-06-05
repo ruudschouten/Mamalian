@@ -11,18 +11,41 @@
 <script>
     var canvas = document.getElementById("canvas"), ctx = canvas.getContext("2d");
     var player = new Player(120, 400, 200, 3, 0.75);
-    var enemy = new Enemy(50, 5, 20);
     var maxWidth = 1000;
     var maxHeight = 400;
     canvas.height = maxHeight;
     canvas.width = maxWidth;
 
+    //Wave Related
     var wave = 1;
     var waves;
-    var enemies;
+    var currentWave;
+    var enemies = new Array(5);
+    var startedWave = false;
+    var introTime = 180;
+    var defeatedEnemies = 0;
 
-    function GetEnemies() {
-        waves = @Html.Raw(Json.Encode(Model.WaveRepo.GetAll()));
+    function StartWave() {
+        if (!startedWave) {
+            var p = @Html.Raw(Json.Encode(Model.Player));
+            player = new Player(p.Stats.Health, 400, 200, 3, 0.75);
+
+            currentWave = @Html.Raw(Json.Encode(Model.FirstWave));
+            var e = currentWave.Enemies;
+            for (var i = 0; i < e.length; i++) {
+                var entry = e[i];
+
+                var enemy = new Enemy(20,
+                    Math.floor((Math.random() * maxWidth - 15) + 1),
+                    Math.floor((Math.random() * maxHeight - 15) + 1),
+                    Math.floor((Math.random() * 2) + 1));
+                if (entry.Stats !== null) {
+                    enemy.health = entry.Stats.Health;
+                }
+                enemies[i] = enemy;
+            }
+            startedWave = true;
+        }
     }
 
     function Point(x, y) {
@@ -41,6 +64,27 @@
             other.right <= this.right &&
             other.top >= this.top &&
             other.bottom <= this.bottom);
+    }
+
+    function ShowWaveStart() {
+        ctx.font = "30px Arial";
+        ctx.fillText("Start wave 1!", 10, 50);
+    }
+
+    function ShowDefeat() {
+        ctx.fillStyle = "#FF0000";
+        ctx.font = "30px Arial";
+        ctx.fillText("You have died!", 10, 50);
+        ctx.font = "12px Arial";
+        ctx.fillText("To try again, please refresh!", 10, 90);
+    }
+
+    function ShowWin() {
+        ctx.fillStyle = "#000";
+        ctx.font = "30px Arial";
+        ctx.fillText("You have won!", 10, 50);
+        ctx.font = "12px Arial";
+        ctx.fillText("To play again, please refresh!", 10, 90);
     }
 
     //Player
@@ -62,29 +106,40 @@
         this.reach = new Rectangle(x, y, this.rectWidth, this.rectHeight);
         this.hitbox = new Rectangle(x, y, this.hitboxWidth, this.hitboxHeight);
     }
-    Player.prototype.Update = function(enemy) {
-        this.Movement();
-        this.reach = new Rectangle(this.x, this.y, this.rectWidth, this.rectHeight);
-        this.hitbox = new Rectangle(this.x, this.y, this.hitboxWidth, this.hitboxHeight);
-        this.currentAttackSpeed--;
-        if (this.keys[32]) {
-            if (this.currentAttackSpeed <= 0) {
-                if (this.reach.contains(enemy.hitbox)) {
-                    alert("Player made contact");
-                    this.Attack(enemy);
-                    this.currentAttackSpeed = this.attackSpeed;
+    Player.prototype.Update = function (enemy) {
+        if (this.health >= 0) {
+            this.Movement();
+            this.reach = new Rectangle(this.x, this.y, this.rectWidth, this.rectHeight);
+            this.hitbox = new Rectangle(this.x, this.y, this.hitboxWidth, this.hitboxHeight);
+            this.currentAttackSpeed--;
+                if (this.keys[32]) {
+                    if (this.currentAttackSpeed <= 0) {
+                        for (var i = 0; i < enemy.length; i++) {
+                            if (this.reach.contains(enemy[i].hitbox)) {
+                                console.log("player made contact with enemy " + i);
+                                this.Attack(enemy[i]);
+                                this.currentAttackSpeed = this.attackSpeed;
+                            }
+                        }
+                    }
                 }
             }
-        }
     }
     Player.prototype.Draw = function () {
-        ctx.fillStyle = "#FF0F0F";
-        ctx.fillRect(this.reach.left, this.reach.top, this.rectWidth, this.rectHeight);
-        ctx.fillStyle = "#FFF000";
-        ctx.fillRect(this.hitbox.left, this.hitbox.top, this.hitboxWidth, this.hitboxHeight);
-        ctx.fillStyle = "#000";
-        ctx.arc(this.x, this.y, 5, 0, Math.PI * 2);
-        ctx.fill();
+        if (this.health >= 0) {
+            //Health
+            ctx.fillStyle = "#000";
+            ctx.font = "12px Arial";
+            ctx.fillText("Health: " + this.health, 15, 15);
+            //Sprite
+            ctx.fillStyle = "#FF0F0F";
+            ctx.fillRect(this.reach.left, this.reach.top, this.rectWidth, this.rectHeight);
+            ctx.fillStyle = "#FFF000";
+            ctx.fillRect(this.hitbox.left, this.hitbox.top, this.hitboxWidth, this.hitboxHeight);
+            ctx.fillStyle = "#000";
+            ctx.arc(this.x, this.y, 5, 0, Math.PI * 2);
+            ctx.fill();
+        }
     }
     Player.prototype.Movement = function () {
         //Up, Down, Left, Right
@@ -102,18 +157,18 @@
         if (this.y >= maxHeight - 5) { this.y = maxHeight - 5; } else if (this.y < 5) { this.y = 5; }
     }
     Player.prototype.Attack = function(enemy) {
-        //TODO: Do a attack
+        enemy.health -= 500;
     }
 
     //Enemies
-    function Enemy(health, x, y) {
+    function Enemy(health, x, y, speed) {
         this.health = health;
         //Movement
         this.x = x;
         this.y = y;
         this.velX = 0;
         this.velY = 0;
-        this.speed = 2;
+        this.speed = speed;
         this.friction = 0.9;
         this.attackSpeed = 0;
         this.rectWidth = 20;
@@ -123,18 +178,22 @@
         this.reach = new Rectangle(x - this.rectWidth / (5 / 2), y - this.rectWidth / (5 / 2), this.rectWidth, this.rectHeight);
         this.hitbox = new Rectangle(x - this.hitWidth / (5 / 2), y - this.hitWidth / (5 / 2), this.hitWidth, this.hitHeight);
     }
-    Enemy.prototype.Update = function(player) {
-        this.Movement(player);
-        this.reach = new Rectangle(this.x, this.y, this.rectWidth, this.rectHeight);
-        this.hitbox = new Rectangle(this.x, this.y, this.hitWidth, this.hitHeight);
+    Enemy.prototype.Update = function (player) {
+        if (this.health > 0) {
+            this.Movement(player);
+            this.reach = new Rectangle(this.x, this.y, this.rectWidth, this.rectHeight);
+            this.hitbox = new Rectangle(this.x, this.y, this.hitWidth, this.hitHeight);
+        }
     }
     Enemy.prototype.Draw = function () {
-        ctx.fillStyle = "#FF00FF";
-        ctx.fillRect(this.reach.left, this.reach.top, this.rectWidth, this.rectHeight);
-        ctx.fillStyle = "#00FF00";
-        ctx.fillRect(this.hitbox.left, this.hitbox.top, this.hitboxWidth, this.hitboxHeight);
-        ctx.fillStyle = "#FF0000";
-        ctx.fillRect(this.x, this.y, 10, 10);
+        if (this.health > 0) {
+            ctx.fillStyle = "#FF00FF";
+            ctx.fillRect(this.reach.left, this.reach.top, this.rectWidth, this.rectHeight);
+            ctx.fillStyle = "#00FF00";
+            ctx.fillRect(this.hitbox.left, this.hitbox.top, this.hitboxWidth, this.hitboxHeight);
+            ctx.fillStyle = "#FF0000";
+            ctx.fillRect(this.x, this.y, 10, 10);
+        }
     }
     Enemy.prototype.Movement = function (player) {
         var speedY = this.speed;
@@ -152,7 +211,9 @@
         this.attackSpeed--;
         if (this.attackSpeed <= 0) {
             if (this.reach.contains(player.hitbox)) {
-                alert("Enemy made contact");
+                console.log("Enemy made contact");
+                this.Attack(player);
+//                alert("Enemy made contact");
                 this.attackSpeed = 90;
             }
         }
@@ -160,13 +221,25 @@
         this.y = Math.round(this.y + this.velY);
     }
     Enemy.prototype.Attack = function(player) {
-        //Damage player
+        player.health -= 20;
     }
 
     function update() {
         requestAnimationFrame(update);
-        player.Update(enemy);
-        enemy.Update(player);
+        if (player.health >= 0) {
+            defeatedEnemies = 0;
+            if (introTime <= 0) {
+                player.Update(enemies);
+                StartWave();
+                for (var i = 0; i < enemies.length; i++) {
+                    if (enemies[i].health >= 0) {
+                        enemies[i].Update(player);
+                    } else {
+                        defeatedEnemies++;
+                    }
+                }
+            }
+        }
         Draw();
     }
 
@@ -174,9 +247,27 @@
         //player
         ctx.clearRect(0, 0, maxWidth, maxHeight);
         ctx.beginPath();
-        ctx.fillStyle = "#FFFF00";
-        player.Draw();
-        enemy.Draw();
+        if (player.health >= 0) {
+
+            if (defeatedEnemies >= 5) {
+                ShowWin();
+            } else {
+                if (!startedWave && introTime >= 0) {
+                    ShowWaveStart();
+                    introTime--;
+                } else {
+                    ctx.fillStyle = "#FFFF00";
+                    player.Draw();
+                    for (var i = 0; i < enemies.length; i++) {
+                        if (enemies[i].health >= 0) {
+                            enemies[i].Draw();
+                        }
+                    }
+                }    
+            }
+        } else {
+            ShowDefeat();
+        }
     }
 
     update();
@@ -184,11 +275,3 @@
     document.body.addEventListener("keydown", function (e) { player.keys[e.keyCode] = true; });
     document.body.addEventListener("keyup", function (e) { player.keys[e.keyCode] = false; });
 </script>
-<div style="text-align: left; margin-left: 4px">
-    <p style="margin: 0 0 -10px 0;"> <label>Level: @Model.Player.Stats.Level</label> </p>
-    <p style="margin: -10px 0 -10px 0;"> <label>Health: @Model.Player.CurrentHealth/@Model.Player.Stats.Health</label></p>
-    <p style="margin: -10px 0 -10px 0;"> <label>Spirit: @Model.Player.Stats.Spirit</label> </p>
-    <p style="margin: -10px 0 -10px 0;"> <label>Strength: @Model.Player.Stats.Strength</label> </p>
-    <p style="margin: -10px 0 -10px 0;"> <label>Dexterity: @Model.Player.Stats.Dexterity</label> </p>
-    <p style="margin: -10px 0 -10px 0;"> <label>Intelligence: @Model.Player.Stats.Intelligence</label> </p>
-</div>

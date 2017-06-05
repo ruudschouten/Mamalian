@@ -27,7 +27,10 @@ namespace MamalianASP.Controllers {
         public ActionResult Play(int id) {
             Player p = new PlayerRepository(new PlayerSQLContext()).GetById(id);
             if (p != null) {
-                return View(p);
+                var model = new CharacterPlayModel();
+                model.PlayerId = id;
+                model.Player = p;
+                return View(model);
             }
             return Content("Please enter an existing ID");
         }
