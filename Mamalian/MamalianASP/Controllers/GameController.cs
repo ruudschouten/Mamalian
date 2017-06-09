@@ -75,7 +75,7 @@ namespace MamalianASP.Controllers {
             var repo = new PlayerRepository(new PlayerSQLContext());
             Player player = repo.Insert(p);
             playerId = player.Id;
-            return RedirectToAction("CreatedPlayer", "Game", new {id = player.Id});
+            return RedirectToAction("Play", "Game", new {id = player.Id});
         }
 
         public ActionResult CreatedPlayer(int id) {
